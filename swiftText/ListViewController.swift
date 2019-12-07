@@ -10,10 +10,25 @@ import UIKit
 
 class ListViewController: UIViewController {
 
+    let imageArr = [UIImage(named: "16a521d332df104d.jpg"),UIImage(named: "avator.png"),UIImage(named: "head.jpg")]
+    
+    lazy var tableview : UITableView = {
+        let table = UITableView(frame: .zero, style: .grouped)
+        table.showsVerticalScrollIndicator = false
+        table.showsHorizontalScrollIndicator = false
+        table.estimatedRowHeight = 0
+        table.estimatedSectionFooterHeight = 0
+        table.estimatedSectionHeaderHeight = 0
+        table.delegate = self
+        table.dataSource = self
+        table.register(imageCell.self, forCellReuseIdentifier: "imageCell")
+        return table
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.gray
-        // Do any additional setup after loading the view.
+        view.backgroundColor = UIColor.white
+        setUI()
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,14 +37,62 @@ class ListViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func setUI() {
+        self.view.addSubview(self.tableview)
+        tableview.snp.makeConstraints { (make) in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.left.right.bottom.equalToSuperview()
+        }
     }
-    */
-
+    
+    func showImg (imgs: [UIImage],img: UIImage) {
+        var number = 0
+        _ = imgs.enumerated().map { (index,image) in
+            if image == img {
+                number = index
+            }
+        }
+        
+        let show = ShowBigImgView(imgs, number: number)
+        
+        UIApplication.shared.keyWindow?.addSubview(show)
+        
+        show.pushAnimation(num: number)
+    }
+}
+extension ListViewController :UITableViewDelegate,UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.imageArr.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: imageCell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! imageCell
+        cell.imageview.image = self.imageArr[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let image = self.imageArr[indexPath.row] else {
+            return
+        }
+        guard let imgs = self.imageArr as? [UIImage] else {
+            return
+        }
+        self.showImg(imgs: imgs, img: image)
+    }
 }

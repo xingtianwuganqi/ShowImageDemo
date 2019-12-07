@@ -48,7 +48,7 @@ class ShowBigImgView: UIView {
     init(urlArr: [String],number: Int) {
         super.init(frame: .zero)
         
-        self.frame = CGRect(x: ScreenW, y: 0, width: ScreenW, height: ScreenH)
+        self.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
         
         self.backgroundColor = UIColor.black
         self.urlArr = urlArr
@@ -124,13 +124,140 @@ class ShowBigImgView: UIView {
         
     }
     
-    func pushAnimation() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
-        }) { (_) in
+    init(_ Images: [UIImage],number: Int) {
+        super.init(frame: .zero)
+        
+        self.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
+        
+        self.backgroundColor = UIColor.black
+        self.addSubview(backScroll)
+        self.backScroll.delegate = self
+        self.backScroll.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
+        self.backScroll.backgroundColor = .black
+        self.backScroll.contentSize = CGSize(width: CGFloat(Images.count) * ScreenW, height: ScreenH)
+        
+        
+        
+        for i in 0..<Images.count {
+            let scroll = UIScrollView.init(frame: CGRect(x: CGFloat(i) * ScreenW, y: 0, width: ScreenW, height: ScreenH))
+            scroll.delegate = self
+            scroll.tag = i
+            scroll.isPagingEnabled = false
+            backScroll.addSubview(scroll)
+            scroll.minimumZoomScale = 1.0
+            scroll.maximumZoomScale = 4
+            scroll.showsHorizontalScrollIndicator = false
+            scroll.showsVerticalScrollIndicator = false
+            
+            let imageview = UIImageView()
+            scroll.addSubview(imageview)
+            
+            let imageV = Images[i]
+            
+            imageview.image = imageV
+            
+            let w = ScreenW
+            let h = ScreenW / (imageV.size.width / imageV.size.height)
+            let y = (ScreenH - h) / 2
+            
+            imageview.frame = CGRect(x: 0, y: y, width: w, height: h)
+    
+            imageview.tag = 10 + i
+            
+            imageview.isUserInteractionEnabled = true
+            scroll.isUserInteractionEnabled = true
+            let doubleTap = UITapGestureRecognizer(target: self, action: #selector(imageClick(tap:)))
+            doubleTap.numberOfTapsRequired = 2
+            imageview.addGestureRecognizer(doubleTap)
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(viewClick(tap:)))
+            tap.numberOfTapsRequired = 1
+            tap.numberOfTouchesRequired = 1
+            imageview.addGestureRecognizer(tap)
+            scroll.addGestureRecognizer(tap)
+            
+            tap.require(toFail: doubleTap)
             
         }
+        self.addSubview(numberLab)
+        self.addSubview(downloadBtn)
+        
+        self.addSubview(backBtn)
+        
+        backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
+        downloadBtn.addTarget(self, action: #selector(downloadImage), for: .touchUpInside)
+        
+        self.backScroll.contentOffset.x = CGFloat(number) * ScreenW
+        self.numberLab.text = "\(number + 1)/\(Images.count)"
     }
+    
+    func pushAnimation(num: Int) {
+        
+        // 获取UIImageView()
+        guard let imageView = self.backScroll.viewWithTag(10 + num) as?  UIImageView else {
+            return
+        }
+        transformAnimation(animationView: imageView)
+        
+    }
+    
+    // 缩放动画
+    func transformAnimation(animationView: UIImageView) {
+        let animation: CABasicAnimation = CABasicAnimation()
+        animation.keyPath = "transform.scale"
+        animation.fromValue = 0.2 // 原始系数
+        animation.toValue = 1 // 缩放系数
+        animation.duration = 0.3
+        animation.isRemovedOnCompletion = true
+        animation.fillMode = kCAFillModeRemoved
+        animationView.layer.add(animation, forKey: nil)
+    }
+    // 缩放 + 淡入淡出
+    func removeAnimation() {
+        
+        let x = Int(self.backScroll.contentOffset.x)
+        let y = Int(ScreenW)
+        guard (x % y) == 0 else{
+            return
+        }
+        // 获取
+        let tag = x / y + 10
+        guard let imageView = self.backScroll.viewWithTag(tag) else {
+            return
+        }
+        
+        
+        let scale = CABasicAnimation()
+        scale.keyPath = "transform.scale"
+        scale.fromValue = 1.0
+        scale.toValue = 0.2
+        scale.duration = 0.3
+        scale.fillMode = kCAFillModeForwards
+        scale.isRemovedOnCompletion = false
+        imageView.layer.add(scale, forKey: nil)
+
+        let backAnimation = CAKeyframeAnimation()
+        backAnimation.keyPath = "opacity"
+        backAnimation.duration = 0.4
+        backAnimation.values = [
+            NSNumber(value: 0.90 as Float),
+            NSNumber(value: 0.60 as Float),
+            NSNumber(value: 0.30 as Float),
+            NSNumber(value: 0.0 as Float),
+
+        ]
+        backAnimation.keyTimes = [
+            NSNumber(value: 0.1),
+            NSNumber(value: 0.2),
+            NSNumber(value: 0.3),
+            NSNumber(value: 0.4)
+        ]
+        backAnimation.fillMode = kCAFillModeForwards
+        backAnimation.isRemovedOnCompletion = false
+        self.layer.add(backAnimation, forKey: nil)
+        
+    }
+
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -170,10 +297,9 @@ class ShowBigImgView: UIView {
     }
     
     @objc func backBtnClick() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.frame = CGRect(x: ScreenW, y: 0, width: ScreenW, height: ScreenH)
-        }) { (_) in
-            
+        
+        self.removeAnimation()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
             self.removeFromSuperview()
         }
     }

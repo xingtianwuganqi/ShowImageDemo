@@ -55,7 +55,7 @@ class HomePageController: UIViewController {
         
         UIApplication.shared.keyWindow?.addSubview(show)
         
-        show.pushAnimation()
+        show.pushAnimation(num: number)
     }
 }
 extension HomePageController :UITableViewDelegate,UITableViewDataSource {
