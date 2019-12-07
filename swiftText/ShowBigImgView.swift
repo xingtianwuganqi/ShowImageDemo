@@ -45,6 +45,7 @@ class ShowBigImgView: UIView {
     }
     
     var urlArr : [String] = []
+    var imgArr : [UIImage] = []
     init(urlArr: [String],number: Int) {
         super.init(frame: .zero)
         
@@ -94,7 +95,7 @@ class ShowBigImgView: UIView {
                 let y = (ScreenH - h) / 2
                 imageview.frame = CGRect(x: 0, y: y, width: w, height: h)
             }
-            imageview.tag = 10 + i
+            imageview.tag = 100 + i
             
             imageview.isUserInteractionEnabled = true
             scroll.isUserInteractionEnabled = true
@@ -130,6 +131,7 @@ class ShowBigImgView: UIView {
         self.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
         
         self.backgroundColor = UIColor.black
+        self.imgArr = Images
         self.addSubview(backScroll)
         self.backScroll.delegate = self
         self.backScroll.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
@@ -162,7 +164,7 @@ class ShowBigImgView: UIView {
             
             imageview.frame = CGRect(x: 0, y: y, width: w, height: h)
     
-            imageview.tag = 10 + i
+            imageview.tag = 100 + i
             
             imageview.isUserInteractionEnabled = true
             scroll.isUserInteractionEnabled = true
@@ -194,7 +196,7 @@ class ShowBigImgView: UIView {
     func pushAnimation(num: Int) {
         
         // 获取UIImageView()
-        guard let imageView = self.backScroll.viewWithTag(10 + num) as?  UIImageView else {
+        guard let imageView = self.backScroll.viewWithTag(100 + num) as?  UIImageView else {
             return
         }
         transformAnimation(animationView: imageView)
@@ -221,7 +223,7 @@ class ShowBigImgView: UIView {
             return
         }
         // 获取
-        let tag = x / y + 10
+        let tag = x / y + 100
         guard let imageView = self.backScroll.viewWithTag(tag) else {
             return
         }
@@ -343,7 +345,7 @@ class ShowBigImgView: UIView {
     func loadImg() {
         let offsetX = self.backScroll.contentOffset.x
         let tagValue = offsetX / ScreenW
-        guard let imageview = self.backScroll.viewWithTag(Int(tagValue))?.viewWithTag(10 + Int(tagValue))  as? UIImageView else{
+        guard let imageview = self.backScroll.viewWithTag(Int(tagValue))?.viewWithTag(100 + Int(tagValue))  as? UIImageView else{
             return
         }
         
@@ -375,7 +377,7 @@ class ShowBigImgView: UIView {
         
         let offsetX = self.backScroll.contentOffset.x
         let tagValue = offsetX / ScreenW
-        guard let imageview = self.backScroll.viewWithTag(Int(tagValue))?.viewWithTag(10 + Int(tagValue)) as? UIImageView else{
+        guard let imageview = self.backScroll.viewWithTag(Int(tagValue))?.viewWithTag(100 + Int(tagValue)) as? UIImageView else{
             return
         }
         
@@ -416,7 +418,7 @@ extension ShowBigImgView : UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         let offsetX = self.backScroll.contentOffset.x
         let tagValue = offsetX / ScreenW
-        return self.backScroll.viewWithTag(Int(tagValue))?.viewWithTag(10 + Int(tagValue))
+        return self.backScroll.viewWithTag(Int(tagValue))?.viewWithTag(100 + Int(tagValue))
     }
     
     // 当缩放完毕的时候调用
@@ -439,14 +441,18 @@ extension ShowBigImgView : UIScrollViewDelegate {
             scrollView.contentSize.width/2:centerX
         centerY = scrollView.contentSize.height > scrollView.frame.size.height ?
             scrollView.contentSize.height/2:centerY
-        scrollView.viewWithTag(10 + Int(tagValue))?.center = CGPoint(x: centerX, y: centerY)
+        scrollView.viewWithTag(100 + Int(tagValue))?.center = CGPoint(x: centerX, y: centerY)
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == self.backScroll {
             let offsetX = self.backScroll.contentOffset.x
             let tagValue = offsetX / ScreenW
-            self.numberLab.text = "\(Int(tagValue) + 1)/\(urlArr.count)"
+            if urlArr.count == 0 {
+                self.numberLab.text = "\(Int(tagValue) + 1)/\(imgArr.count)"
+            }else{
+                self.numberLab.text = "\(Int(tagValue) + 1)/\(urlArr.count)"
+            }
         }
     }
         
