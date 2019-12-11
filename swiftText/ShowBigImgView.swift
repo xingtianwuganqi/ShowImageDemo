@@ -50,7 +50,6 @@ class ShowBigImgView: UIView {
         super.init(frame: .zero)
         
         self.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
-        
         self.backgroundColor = UIColor.black
         self.urlArr = urlArr
         self.addSubview(backScroll)
@@ -58,8 +57,6 @@ class ShowBigImgView: UIView {
         self.backScroll.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
         self.backScroll.backgroundColor = .black
         self.backScroll.contentSize = CGSize(width: CGFloat(urlArr.count) * ScreenW, height: ScreenH)
-        
-        
         
         for i in 0..<urlArr.count {
             let scroll = UIScrollView.init(frame: CGRect(x: CGFloat(i) * ScreenW, y: 0, width: ScreenW, height: ScreenH))
@@ -80,11 +77,9 @@ class ShowBigImgView: UIView {
                     self.loading.isHidden = true
                     return
                 }
-                
                 guard let width = img?.size.width else {
                     return
                 }
-                
                 guard let height = img?.size.height else {
                     return
                 }
@@ -129,7 +124,6 @@ class ShowBigImgView: UIView {
         super.init(frame: .zero)
         
         self.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
-        
         self.backgroundColor = UIColor.black
         self.imgArr = Images
         self.addSubview(backScroll)
@@ -137,9 +131,7 @@ class ShowBigImgView: UIView {
         self.backScroll.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
         self.backScroll.backgroundColor = .black
         self.backScroll.contentSize = CGSize(width: CGFloat(Images.count) * ScreenW, height: ScreenH)
-        
-        
-        
+
         for i in 0..<Images.count {
             let scroll = UIScrollView.init(frame: CGRect(x: CGFloat(i) * ScreenW, y: 0, width: ScreenW, height: ScreenH))
             scroll.delegate = self
@@ -191,6 +183,12 @@ class ShowBigImgView: UIView {
         
         self.backScroll.contentOffset.x = CGFloat(number) * ScreenW
         self.numberLab.text = "\(number + 1)/\(Images.count)"
+    
+    }
+    
+    func show(number:Int) {
+        UIApplication.shared.keyWindow?.addSubview(self)
+        self.pushAnimation(num: number)
     }
     
     func pushAnimation(num: Int) {
@@ -329,10 +327,6 @@ class ShowBigImgView: UIView {
         self.backBtnClick()
     }
     
-    @objc func viewDoubleClick(tap:UITapGestureRecognizer) {
-        return
-    }
-    
     func zoomRectForScale(scrollview: UIScrollView, scale: CGFloat,center: CGPoint) -> CGRect {
         var zoomRect: CGRect = CGRect()
         zoomRect.size.height = scrollview.frame.size.height / scale
@@ -340,37 +334,6 @@ class ShowBigImgView: UIView {
         zoomRect.origin.x = center.x - (zoomRect.size.width / 2.0)
         zoomRect.origin.y = center.y - (zoomRect.size.height / 2.0)
         return zoomRect
-    }
-    
-    func loadImg() {
-        let offsetX = self.backScroll.contentOffset.x
-        let tagValue = offsetX / ScreenW
-        guard let imageview = self.backScroll.viewWithTag(Int(tagValue))?.viewWithTag(100 + Int(tagValue))  as? UIImageView else{
-            return
-        }
-        
-        imageview.sd_setImage(with: URL(string: urlArr[Int(tagValue)]), placeholderImage: UIImage.imageWithColor(color: UIColor(hexString: "#000000")!), options: []) { (img, error, _, url) in
-            guard img != nil else {
-                self.loading.isHidden = true
-                return
-            }
-            self.loading.isHidden = true
-            
-            guard let width = img?.size.width else {
-                return
-            }
-            
-            guard let height = img?.size.height else {
-                return
-            }
-            
-            self.loading.isHidden = true
-            let w = ScreenW
-            let h = ScreenW / (width / height)
-            let y = (ScreenH - h) / 2
-            imageview.frame = CGRect(x: 0, y: y, width: w, height: h)
-        }
-        
     }
     
     @objc func downloadImage() {

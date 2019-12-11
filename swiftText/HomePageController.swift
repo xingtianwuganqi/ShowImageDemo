@@ -52,10 +52,7 @@ class HomePageController: UIViewController {
         }
         
         let show = ShowBigImgView(urlArr: imgs,number: number)
-        
-        UIApplication.shared.keyWindow?.addSubview(show)
-        
-        show.pushAnimation(num: number)
+        show.show(number: number)
     }
 }
 extension HomePageController :UITableViewDelegate,UITableViewDataSource {
