@@ -160,18 +160,16 @@ extension ShowBigImgView : UIScrollViewDelegate {
 ```
 6.调用
 ```
-  func showImg (imgs: [String],url: String) {
+    func showImg (imgs: [String],url: String) {
         var number = 0
-        //获取当前图片的下标
         _ = imgs.enumerated().map { (index,urlStr) in
             if urlStr == url {
                 number = index
             }
         }
+        
         let show = ShowBigImgView(urlArr: imgs,number: number)
-        UIApplication.shared.keyWindow?.addSubview(show)
-        // 缩放动画
-        show.pushAnimation(num: number)
+        show.show(number: number)
     }
 ```
 
