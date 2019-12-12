@@ -87,8 +87,16 @@ class ShowBigImgView: UIView {
                 self.loading.isHidden = true
                 let w = ScreenW
                 let h = ScreenW / (width / height)
-                let y = (ScreenH - h) / 2
-                imageview.frame = CGRect(x: 0, y: y, width: w, height: h)
+                
+                if h > ScreenH {
+                    let y = (h - ScreenH) / 2
+                    scroll.contentSize = CGSize(width: ScreenW, height: h)
+                    scroll.contentOffset = CGPoint(x: 0, y: y)
+                    imageview.frame = CGRect(x: 0, y: 0, width: w, height: h)
+                }else{
+                    let y = (ScreenH - h) / 2
+                    imageview.frame = CGRect(x: 0, y: y, width: w, height: h)
+                }
             }
             imageview.tag = 100 + i
             
@@ -152,9 +160,16 @@ class ShowBigImgView: UIView {
             
             let w = ScreenW
             let h = ScreenW / (imageV.size.width / imageV.size.height)
-            let y = (ScreenH - h) / 2
-            
-            imageview.frame = CGRect(x: 0, y: y, width: w, height: h)
+                        
+            if h > ScreenH {
+                let y = (h - ScreenH) / 2
+                scroll.contentSize = CGSize(width: ScreenW, height: h)
+                scroll.contentOffset = CGPoint(x: 0, y: y)
+                imageview.frame = CGRect(x: 0, y: 0, width: w, height: h)
+            }else{
+                let y = (ScreenH - h) / 2
+                imageview.frame = CGRect(x: 0, y: y, width: w, height: h)
+            }
     
             imageview.tag = 100 + i
             

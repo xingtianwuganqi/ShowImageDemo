@@ -10,7 +10,7 @@ import UIKit
 
 class ListViewController: UIViewController {
 
-    let imageArr = [UIImage(named: "16a521d332df104d.jpg"),UIImage(named: "avator.png"),UIImage(named: "head.jpg")]
+    let imageArr = [UIImage(named: "16a521d332df104d.jpg"),UIImage(named: "avator.png"),UIImage(named: "head.jpg"),UIImage(named: "long.jpg")]
     
     lazy var tableview : UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -55,10 +55,7 @@ class ListViewController: UIViewController {
         }
         
         let show = ShowBigImgView(imgs, number: number)
-        
-        UIApplication.shared.keyWindow?.addSubview(show)
-        
-        show.pushAnimation(num: number)
+        show.show(number: number)
     }
 }
 extension ListViewController :UITableViewDelegate,UITableViewDataSource {
