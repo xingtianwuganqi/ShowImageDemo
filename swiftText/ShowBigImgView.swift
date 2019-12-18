@@ -216,64 +216,6 @@ class ShowBigImgView: UIView {
         
     }
     
-    // 缩放动画
-    func transformAnimation(animationView: UIImageView) {
-        let animation: CABasicAnimation = CABasicAnimation()
-        animation.keyPath = "transform.scale"
-        animation.fromValue = 0.2 // 原始系数
-        animation.toValue = 1 // 缩放系数
-        animation.duration = 0.3
-        animation.isRemovedOnCompletion = true
-        animation.fillMode = kCAFillModeRemoved
-        animationView.layer.add(animation, forKey: nil)
-    }
-    // 缩放 + 淡入淡出
-    func removeAnimation() {
-        
-        let x = Int(self.backScroll.contentOffset.x)
-        let y = Int(ScreenW)
-        guard (x % y) == 0 else{
-            return
-        }
-        // 获取
-        let tag = x / y + 100
-        guard let imageView = self.backScroll.viewWithTag(tag) else {
-            return
-        }
-        
-        
-        let scale = CABasicAnimation()
-        scale.keyPath = "transform.scale"
-        scale.fromValue = 1.0
-        scale.toValue = 0.2
-        scale.duration = 0.3
-        scale.fillMode = kCAFillModeForwards
-        scale.isRemovedOnCompletion = false
-        imageView.layer.add(scale, forKey: nil)
-
-        let backAnimation = CAKeyframeAnimation()
-        backAnimation.keyPath = "opacity"
-        backAnimation.duration = 0.4
-        backAnimation.values = [
-            NSNumber(value: 0.90 as Float),
-            NSNumber(value: 0.60 as Float),
-            NSNumber(value: 0.30 as Float),
-            NSNumber(value: 0.0 as Float),
-
-        ]
-        backAnimation.keyTimes = [
-            NSNumber(value: 0.1),
-            NSNumber(value: 0.2),
-            NSNumber(value: 0.3),
-            NSNumber(value: 0.4)
-        ]
-        backAnimation.fillMode = kCAFillModeForwards
-        backAnimation.isRemovedOnCompletion = false
-        self.layer.add(backAnimation, forKey: nil)
-        
-    }
-
-    
     override func layoutSubviews() {
         super.layoutSubviews()
         backBtn.snp.makeConstraints { (make) in
@@ -365,31 +307,6 @@ class ShowBigImgView: UIView {
         UIImageWriteToSavedPhotosAlbum(img, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
-    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        if let error = error {
-            if error.localizedDescription == "数据不可用" {
-                openSystemSettingPhotoLibrary(type: "add")
-            }else{
-                
-                printLog(message: error.localizedDescription)
-            }
-        } else {
-            printLog(message: "已保存到本地相册")
-        }
-    }
-    
-    func openSystemSettingPhotoLibrary(type:String) {
-        var destri = ""
-        if type == "add" {
-            destri = "加入"
-        }else{
-            destri = "访问"
-        }
-        
-        
-        let alertView = UIAlertView(title: "未获得权限访问您的照片", message: "请在设置选项中允许720yun\(destri)您的照片", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "去设置")
-        alertView.show()
-    }
 }
 extension ShowBigImgView : UIScrollViewDelegate {
     // 当scrollview 尝试进行缩放的时候
@@ -435,20 +352,108 @@ extension ShowBigImgView : UIScrollViewDelegate {
     }
         
 }
+/// 动画
+extension ShowBigImgView {
+    // 缩放动画
+    func transformAnimation(animationView: UIImageView) {
+        let animation: CABasicAnimation = CABasicAnimation()
+        animation.keyPath = "transform.scale"
+        animation.fromValue = 0.2 // 原始系数
+        animation.toValue = 1 // 缩放系数
+        animation.duration = 0.3
+        animation.isRemovedOnCompletion = true
+        animation.fillMode = kCAFillModeRemoved
+        animationView.layer.add(animation, forKey: nil)
+    }
+    // 缩放 + 淡入淡出
+    func removeAnimation() {
+        
+        let x = Int(self.backScroll.contentOffset.x)
+        let y = Int(ScreenW)
+        guard (x % y) == 0 else{
+            return
+        }
+        // 获取
+        let tag = x / y + 100
+        guard let imageView = self.backScroll.viewWithTag(tag) else {
+            return
+        }
+        
+        
+        let scale = CABasicAnimation()
+        scale.keyPath = "transform.scale"
+        scale.fromValue = 1.0
+        scale.toValue = 0.2
+        scale.duration = 0.3
+        scale.fillMode = kCAFillModeForwards
+        scale.isRemovedOnCompletion = false
+        imageView.layer.add(scale, forKey: nil)
+
+        let backAnimation = CAKeyframeAnimation()
+        backAnimation.keyPath = "opacity"
+        backAnimation.duration = 0.4
+        backAnimation.values = [
+            NSNumber(value: 0.90 as Float),
+            NSNumber(value: 0.60 as Float),
+            NSNumber(value: 0.30 as Float),
+            NSNumber(value: 0.0 as Float),
+
+        ]
+        backAnimation.keyTimes = [
+            NSNumber(value: 0.1),
+            NSNumber(value: 0.2),
+            NSNumber(value: 0.3),
+            NSNumber(value: 0.4)
+        ]
+        backAnimation.fillMode = kCAFillModeForwards
+        backAnimation.isRemovedOnCompletion = false
+        self.layer.add(backAnimation, forKey: nil)
+        
+    }
+
+}
+
 extension ShowBigImgView : UIAlertViewDelegate {
-//    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
-//        let btnTitle = alertView.buttonTitle(at: buttonIndex)
-//        if btnTitle == "取消" {
-//            alertView.dismiss(withClickedButtonIndex: buttonIndex, animated: true)
-//        }else if btnTitle == "去设置" {
-//            let url=URL.init(string: UIApplication.openSettingsURLString)
-//
-//            if UIApplication.shared.canOpenURL(url!){
-//
-//                UIApplication.shared.open(url!, options: [:], completionHandler: { (ist) in
-//
-//                })
-//            }
-//        }
-//    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            if error.localizedDescription == "数据不可用" {
+                openSystemSettingPhotoLibrary(type: "add")
+            }else{
+                
+                printLog(message: error.localizedDescription)
+            }
+        } else {
+            printLog(message: "已保存到本地相册")
+        }
+    }
+    
+    func openSystemSettingPhotoLibrary(type:String) {
+        var destri = ""
+        if type == "add" {
+            destri = "加入"
+        }else{
+            destri = "访问"
+        }
+        
+        
+        let alertView = UIAlertView(title: "未获得权限访问您的照片", message: "请在设置选项中允许720yun\(destri)您的照片", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "去设置")
+        alertView.show()
+    }
+    
+    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
+        let btnTitle = alertView.buttonTitle(at: buttonIndex)
+        if btnTitle == "取消" {
+            alertView.dismiss(withClickedButtonIndex: buttonIndex, animated: true)
+        }else if btnTitle == "去设置" {
+            let url=URL.init(string: UIApplicationOpenSettingsURLString)
+
+            if UIApplication.shared.canOpenURL(url!){
+
+                UIApplication.shared.open(url!, options: [:], completionHandler: { (ist) in
+
+                })
+            }
+        }
+    }
 }
