@@ -22,6 +22,7 @@ init(urlArr: [String],number: Int)
 init(_ Images: [UIImage],number: Int)
 ```
 在初始化方法中初始化backScrollView 和承载imageView的scrollView,并给imageView和scrollView添加点击手势
+
 2.承载imageView的scrollView设置代理方法
 ```
 extension ShowBigImgView : UIScrollViewDelegate {
