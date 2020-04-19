@@ -21,7 +21,7 @@ class YUNNavigationController: UINavigationController,UIGestureRecognizerDelegat
 //        self.navigationBar.setBackgroundImage(UIImage(), for: .default)
 //        self.navigationBar.shadowImage = UIImage()
         
-        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffsetMake(-500, 0), for:UIBarMetrics.default)
+        UIBarButtonItem.appearance().setBackButtonTitlePositionAdjustment(UIOffset(horizontal: -500, vertical: 0), for:UIBarMetrics.default)
     
     }
     
@@ -60,11 +60,11 @@ class YUNNavigationController: UINavigationController,UIGestureRecognizerDelegat
     }
     //是否允许手势触发
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return self.childViewControllers.count == 1 ? false : true
+        return self.children.count == 1 ? false : true
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        if self.childViewControllers.count != 0 {
+        if self.children.count != 0 {
             viewController.navigationItem.leftBarButtonItem = UIBarButtonItem.init(image: #imageLiteral(resourceName: "backed"), style: .plain, target: self, action: #selector(backClick))
             viewController.hidesBottomBarWhenPushed = true
 

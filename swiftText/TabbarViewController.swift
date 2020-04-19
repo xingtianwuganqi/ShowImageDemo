@@ -17,8 +17,8 @@ class TabbarViewController: UITabBarController {
     super.init(nibName: nil, bundle: nil)
 
         
-    UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.gray], for:UIControlState.normal)
-    UITabBarItem.appearance().setTitleTextAttributes([NSAttributedStringKey.foregroundColor: UIColor.orange], for:UIControlState.selected)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray], for:UIControl.State.normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.orange], for:UIControl.State.selected)
         
         
     }
@@ -48,7 +48,7 @@ class TabbarViewController: UITabBarController {
         navigation.navigationBar.tintColor = .black
         
         
-        self.addChildViewController(navigation)
+        self.addChild(navigation)
 
         
     }

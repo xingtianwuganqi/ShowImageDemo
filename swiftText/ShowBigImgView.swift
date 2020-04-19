@@ -7,42 +7,53 @@
 //
 
 import UIKit
-import RxSwift
-import SwifterSwift
 
 class ShowBigImgView: UIView {
     
-    let backBtn = UIButton(type: .custom).then { (button) in
-        button.setImage(UIImage(named: "back_white"), for: .normal)
-        button.setImage(UIImage(named: "back_white"), for: .normal)
-    }
-
+    let ScreenW = UIScreen.main.bounds.size.width
+    let ScreenH = UIScreen.main.bounds.size.height
     
-    let backScroll = UIScrollView().then { (view) in
+    lazy var backBtn : UIButton = {
+        let button = UIButton.init(type: .custom)
+        button.setImage(UIImage(named: "back_white"), for: .normal)
+        button.setImage(UIImage(named: "back_white"), for: .normal)
+        return button
+    }()
+    
+    lazy var backScroll : UIScrollView = {
+        let view = UIScrollView.init()
         view.backgroundColor = .white
         view.isPagingEnabled = true
         view.showsVerticalScrollIndicator = false
         view.showsHorizontalScrollIndicator = false
-    }
+        return view
+    }()
     
-    let numberLab = UILabel().then { (label) in
-        label.textColor = .white
-        label.font = UIFont.init(name: Medium, size: 14)
-    }
+//    lazy var numberLab : UILabel = {
+//        let label = UILabel()
+//        label.textColor = .white
+//        label.font = UIFont.systemFont(ofSize: 14)
+//        return label
+//    }()
     
-    let downloadBtn = UIButton(type: .custom).then { (button) in
-        button.setImage(UIImage(named: "upload_download"), for: .normal)
-        button.setTitle("保存到相册", for: .normal)
-        button.titleLabel?.font = UIFont.init(name: Medium, size: 14)
-        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-    }
+//    lazy var downloadBtn : UIButton = {
+//        let button = UIButton(type: .custom)
+//        button.setImage(UIImage(named: "upload_download"), for: .normal)
+//        button.setTitle("保存到相册", for: .normal)
+//        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+//        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
+//        return button
+//    }()
+
     
-    let loading = UILabel().then { (label) in
+    lazy var loading : UILabel = {
+        let label = UILabel()
         label.text = "图片加载中"
         label.textColor = UIColor.white
-        label.font = UIFont.init(name: Bold, size: 14)
+        label.font = UIFont.systemFont(ofSize: 14)
         label.isHidden = false
-    }
+        return label
+    }()
     
     var urlArr : [String] = []
     var imgArr : [UIImage] = []
@@ -72,7 +83,7 @@ class ShowBigImgView: UIView {
             let imageview = UIImageView()
             scroll.addSubview(imageview)
             
-            imageview.sd_setImage(with: URL(string: urlArr[i]), placeholderImage: UIImage.imageWithColor(color: UIColor(hexString: "#000000")!), options: []) { (img, error, _, url) in
+            imageview.sd_setImage(with: URL(string: urlArr[i]), placeholderImage: UIImage.imageWithColor(color: UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)), options: []) { (img, error, _, url) in
                 guard img != nil else {
                     self.loading.isHidden = true
                     return
@@ -85,16 +96,16 @@ class ShowBigImgView: UIView {
                 }
                 
                 self.loading.isHidden = true
-                let w = ScreenW
-                let h = ScreenW / (width / height)
+                let w = self.ScreenW
+                let h = self.ScreenW / (width / height)
                 
-                if h > ScreenH {
-                    let y = (h - ScreenH) / 2
-                    scroll.contentSize = CGSize(width: ScreenW, height: h)
+                if h > self.ScreenH {
+                    let y = (h - self.ScreenH) / 2
+                    scroll.contentSize = CGSize(width: self.ScreenW, height: h)
                     scroll.contentOffset = CGPoint(x: 0, y: y)
                     imageview.frame = CGRect(x: 0, y: 0, width: w, height: h)
                 }else{
-                    let y = (ScreenH - h) / 2
+                    let y = (self.ScreenH - h) / 2
                     imageview.frame = CGRect(x: 0, y: y, width: w, height: h)
                 }
             }
@@ -115,16 +126,17 @@ class ShowBigImgView: UIView {
             tap.require(toFail: doubleTap)
             
         }
-        self.addSubview(numberLab)
-        self.addSubview(downloadBtn)
+//        self.addSubview(numberLab)
+        self.addSubview(loading)
+//        self.addSubview(downloadBtn)
         
         self.addSubview(backBtn)
         
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
-        downloadBtn.addTarget(self, action: #selector(downloadImage), for: .touchUpInside)
+//        downloadBtn.addTarget(self, action: #selector(downloadImage), for: .touchUpInside)
         
         self.backScroll.contentOffset.x = CGFloat(number) * ScreenW
-        self.numberLab.text = "\(number + 1)/\(urlArr.count)"
+//        self.numberLab.text = "\(number + 1)/\(urlArr.count)"
         
     }
     
@@ -188,16 +200,17 @@ class ShowBigImgView: UIView {
             tap.require(toFail: doubleTap)
             
         }
-        self.addSubview(numberLab)
-        self.addSubview(downloadBtn)
+//        self.addSubview(numberLab)
+        self.addSubview(loading)
+//        self.addSubview(downloadBtn)
         
         self.addSubview(backBtn)
         
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
-        downloadBtn.addTarget(self, action: #selector(downloadImage), for: .touchUpInside)
+//        downloadBtn.addTarget(self, action: #selector(downloadImage), for: .touchUpInside)
         
         self.backScroll.contentOffset.x = CGFloat(number) * ScreenW
-        self.numberLab.text = "\(number + 1)/\(Images.count)"
+//        self.numberLab.text = "\(number + 1)/\(Images.count)"
     
     }
     
@@ -224,25 +237,25 @@ class ShowBigImgView: UIView {
             make.size.equalTo(CGSize(width: 40, height: 40))
         }
         
-        numberLab.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(20)
-            if #available(iOS 11.0, *) {
-                make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-20)
-            } else {
-                make.bottom.equalToSuperview().offset(-20)
-            }
-        }
-        
-        downloadBtn.snp.makeConstraints { (make) in
-            make.right.equalToSuperview().offset(-20)
-            make.centerY.equalTo(numberLab)
-            make.size.equalTo(CGSize(width: 85, height: 20))
-        }
-        
-//        loading.snp.makeConstraints { (make) in
-//            make.centerY.equalToSuperview()
-//            make.centerX.equalToSuperview()
+//        numberLab.snp.makeConstraints { (make) in
+//            make.left.equalToSuperview().offset(20)
+//            if #available(iOS 11.0, *) {
+//                make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-20)
+//            } else {
+//                make.bottom.equalToSuperview().offset(-20)
+//            }
 //        }
+        
+//        downloadBtn.snp.makeConstraints { (make) in
+//            make.right.equalToSuperview().offset(-20)
+//            make.centerY.equalTo(numberLab)
+//            make.size.equalTo(CGSize(width: 85, height: 20))
+//        }
+        
+        loading.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -318,12 +331,12 @@ extension ShowBigImgView : UIScrollViewDelegate {
     
     // 当缩放完毕的时候调用
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        printLog(message: "缩放结束-\(scale)")
+    
     }
     
     // 当正在缩放的时候
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        printLog(message: "正在缩放")
+        
         
         let offsetX = self.backScroll.contentOffset.x
         let tagValue = offsetX / ScreenW
@@ -339,17 +352,17 @@ extension ShowBigImgView : UIScrollViewDelegate {
         scrollView.viewWithTag(100 + Int(tagValue))?.center = CGPoint(x: centerX, y: centerY)
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        if scrollView == self.backScroll {
-            let offsetX = self.backScroll.contentOffset.x
-            let tagValue = offsetX / ScreenW
-            if urlArr.count == 0 {
-                self.numberLab.text = "\(Int(tagValue) + 1)/\(imgArr.count)"
-            }else{
-                self.numberLab.text = "\(Int(tagValue) + 1)/\(urlArr.count)"
-            }
-        }
-    }
+//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+//        if scrollView == self.backScroll {
+//            let offsetX = self.backScroll.contentOffset.x
+//            let tagValue = offsetX / ScreenW
+//            if urlArr.count == 0 {
+//                self.numberLab.text = "\(Int(tagValue) + 1)/\(imgArr.count)"
+//            }else{
+//                self.numberLab.text = "\(Int(tagValue) + 1)/\(urlArr.count)"
+//            }
+//        }
+//    }
         
 }
 /// 动画
@@ -362,7 +375,7 @@ extension ShowBigImgView {
         animation.toValue = 1 // 缩放系数
         animation.duration = 0.3
         animation.isRemovedOnCompletion = true
-        animation.fillMode = kCAFillModeRemoved
+        animation.fillMode = CAMediaTimingFillMode.removed
         animationView.layer.add(animation, forKey: nil)
     }
     // 缩放 + 淡入淡出
@@ -385,7 +398,7 @@ extension ShowBigImgView {
         scale.fromValue = 1.0
         scale.toValue = 0.2
         scale.duration = 0.3
-        scale.fillMode = kCAFillModeForwards
+        scale.fillMode = CAMediaTimingFillMode.forwards
         scale.isRemovedOnCompletion = false
         imageView.layer.add(scale, forKey: nil)
 
@@ -405,7 +418,7 @@ extension ShowBigImgView {
             NSNumber(value: 0.3),
             NSNumber(value: 0.4)
         ]
-        backAnimation.fillMode = kCAFillModeForwards
+        backAnimation.fillMode = CAMediaTimingFillMode.forwards
         backAnimation.isRemovedOnCompletion = false
         self.layer.add(backAnimation, forKey: nil)
         
@@ -420,11 +433,10 @@ extension ShowBigImgView : UIAlertViewDelegate {
             if error.localizedDescription == "数据不可用" {
                 openSystemSettingPhotoLibrary(type: "add")
             }else{
-                
-                printLog(message: error.localizedDescription)
+                print(error.localizedDescription)
             }
         } else {
-            printLog(message: "已保存到本地相册")
+            print("保存到相册")
         }
     }
     
@@ -446,7 +458,7 @@ extension ShowBigImgView : UIAlertViewDelegate {
         if btnTitle == "取消" {
             alertView.dismiss(withClickedButtonIndex: buttonIndex, animated: true)
         }else if btnTitle == "去设置" {
-            let url=URL.init(string: UIApplicationOpenSettingsURLString)
+            let url=URL.init(string: UIApplication.openSettingsURLString)
 
             if UIApplication.shared.canOpenURL(url!){
 
