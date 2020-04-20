@@ -29,22 +29,22 @@ class ShowBigImgView: UIView {
         return view
     }()
     
-//    lazy var numberLab : UILabel = {
-//        let label = UILabel()
-//        label.textColor = .white
-//        label.font = UIFont.systemFont(ofSize: 14)
-//        return label
-//    }()
+    //    lazy var numberLab : UILabel = {
+    //        let label = UILabel()
+    //        label.textColor = .white
+    //        label.font = UIFont.systemFont(ofSize: 14)
+    //        return label
+    //    }()
     
-//    lazy var downloadBtn : UIButton = {
-//        let button = UIButton(type: .custom)
-//        button.setImage(UIImage(named: "upload_download"), for: .normal)
-//        button.setTitle("保存到相册", for: .normal)
-//        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-//        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-//        return button
-//    }()
-
+    //    lazy var downloadBtn : UIButton = {
+    //        let button = UIButton(type: .custom)
+    //        button.setImage(UIImage(named: "upload_download"), for: .normal)
+    //        button.setTitle("保存到相册", for: .normal)
+    //        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+    //        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
+    //        return button
+    //    }()
+    
     
     lazy var loading : UILabel = {
         let label = UILabel()
@@ -54,6 +54,8 @@ class ShowBigImgView: UIView {
         label.isHidden = false
         return label
     }()
+    
+    var dismissCallBack: (() -> Void)?
     
     var urlArr : [String] = []
     var imgArr : [UIImage] = []
@@ -126,18 +128,18 @@ class ShowBigImgView: UIView {
             tap.require(toFail: doubleTap)
             
         }
-//        self.addSubview(numberLab)
+        //        self.addSubview(numberLab)
         self.addSubview(loading)
-//        self.addSubview(downloadBtn)
+        //        self.addSubview(downloadBtn)
         
         self.addSubview(backBtn)
         
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
-//        downloadBtn.addTarget(self, action: #selector(downloadImage), for: .touchUpInside)
+        //        downloadBtn.addTarget(self, action: #selector(downloadImage), for: .touchUpInside)
         
         self.backScroll.contentOffset.x = CGFloat(number) * ScreenW
-//        self.numberLab.text = "\(number + 1)/\(urlArr.count)"
-        
+        //        self.numberLab.text = "\(number + 1)/\(urlArr.count)"
+        setUI()
     }
     
     init(_ Images: [UIImage],number: Int) {
@@ -151,7 +153,7 @@ class ShowBigImgView: UIView {
         self.backScroll.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
         self.backScroll.backgroundColor = .black
         self.backScroll.contentSize = CGSize(width: CGFloat(Images.count) * ScreenW, height: ScreenH)
-
+        
         for i in 0..<Images.count {
             let scroll = UIScrollView.init(frame: CGRect(x: CGFloat(i) * ScreenW, y: 0, width: ScreenW, height: ScreenH))
             scroll.delegate = self
@@ -172,7 +174,7 @@ class ShowBigImgView: UIView {
             
             let w = ScreenW
             let h = ScreenW / (imageV.size.width / imageV.size.height)
-                        
+            
             if h > ScreenH {
                 let y = (h - ScreenH) / 2
                 scroll.contentSize = CGSize(width: ScreenW, height: h)
@@ -182,7 +184,7 @@ class ShowBigImgView: UIView {
                 let y = (ScreenH - h) / 2
                 imageview.frame = CGRect(x: 0, y: y, width: w, height: h)
             }
-    
+            
             imageview.tag = 100 + i
             
             imageview.isUserInteractionEnabled = true
@@ -200,18 +202,18 @@ class ShowBigImgView: UIView {
             tap.require(toFail: doubleTap)
             
         }
-//        self.addSubview(numberLab)
+        //        self.addSubview(numberLab)
         self.addSubview(loading)
-//        self.addSubview(downloadBtn)
+        //        self.addSubview(downloadBtn)
         
         self.addSubview(backBtn)
         
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
-//        downloadBtn.addTarget(self, action: #selector(downloadImage), for: .touchUpInside)
+        //        downloadBtn.addTarget(self, action: #selector(downloadImage), for: .touchUpInside)
         
         self.backScroll.contentOffset.x = CGFloat(number) * ScreenW
-//        self.numberLab.text = "\(number + 1)/\(Images.count)"
-    
+        //        self.numberLab.text = "\(number + 1)/\(Images.count)"
+        setUI()
     }
     
     func show(number:Int) {
@@ -229,28 +231,27 @@ class ShowBigImgView: UIView {
         
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    func setUI() {
         backBtn.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(5)
             make.top.equalToSuperview().offset(44)
             make.size.equalTo(CGSize(width: 40, height: 40))
         }
         
-//        numberLab.snp.makeConstraints { (make) in
-//            make.left.equalToSuperview().offset(20)
-//            if #available(iOS 11.0, *) {
-//                make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-20)
-//            } else {
-//                make.bottom.equalToSuperview().offset(-20)
-//            }
-//        }
+        //        numberLab.snp.makeConstraints { (make) in
+        //            make.left.equalToSuperview().offset(20)
+        //            if #available(iOS 11.0, *) {
+        //                make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-20)
+        //            } else {
+        //                make.bottom.equalToSuperview().offset(-20)
+        //            }
+        //        }
         
-//        downloadBtn.snp.makeConstraints { (make) in
-//            make.right.equalToSuperview().offset(-20)
-//            make.centerY.equalTo(numberLab)
-//            make.size.equalTo(CGSize(width: 85, height: 20))
-//        }
+        //        downloadBtn.snp.makeConstraints { (make) in
+        //            make.right.equalToSuperview().offset(-20)
+        //            make.centerY.equalTo(numberLab)
+        //            make.size.equalTo(CGSize(width: 85, height: 20))
+        //        }
         
         loading.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
@@ -267,10 +268,9 @@ class ShowBigImgView: UIView {
     }
     
     @objc func backBtnClick() {
-        
         self.removeAnimation()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.removeFromSuperview()
+            self.dismissCallBack?()
         }
     }
     
@@ -331,7 +331,7 @@ extension ShowBigImgView : UIScrollViewDelegate {
     
     // 当缩放完毕的时候调用
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-    
+        
     }
     
     // 当正在缩放的时候
@@ -352,18 +352,18 @@ extension ShowBigImgView : UIScrollViewDelegate {
         scrollView.viewWithTag(100 + Int(tagValue))?.center = CGPoint(x: centerX, y: centerY)
     }
     
-//    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-//        if scrollView == self.backScroll {
-//            let offsetX = self.backScroll.contentOffset.x
-//            let tagValue = offsetX / ScreenW
-//            if urlArr.count == 0 {
-//                self.numberLab.text = "\(Int(tagValue) + 1)/\(imgArr.count)"
-//            }else{
-//                self.numberLab.text = "\(Int(tagValue) + 1)/\(urlArr.count)"
-//            }
-//        }
-//    }
-        
+    //    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    //        if scrollView == self.backScroll {
+    //            let offsetX = self.backScroll.contentOffset.x
+    //            let tagValue = offsetX / ScreenW
+    //            if urlArr.count == 0 {
+    //                self.numberLab.text = "\(Int(tagValue) + 1)/\(imgArr.count)"
+    //            }else{
+    //                self.numberLab.text = "\(Int(tagValue) + 1)/\(urlArr.count)"
+    //            }
+    //        }
+    //    }
+    
 }
 /// 动画
 extension ShowBigImgView {
@@ -401,7 +401,7 @@ extension ShowBigImgView {
         scale.fillMode = CAMediaTimingFillMode.forwards
         scale.isRemovedOnCompletion = false
         imageView.layer.add(scale, forKey: nil)
-
+        
         let backAnimation = CAKeyframeAnimation()
         backAnimation.keyPath = "opacity"
         backAnimation.duration = 0.4
@@ -410,7 +410,7 @@ extension ShowBigImgView {
             NSNumber(value: 0.60 as Float),
             NSNumber(value: 0.30 as Float),
             NSNumber(value: 0.0 as Float),
-
+            
         ]
         backAnimation.keyTimes = [
             NSNumber(value: 0.1),
@@ -423,7 +423,7 @@ extension ShowBigImgView {
         self.layer.add(backAnimation, forKey: nil)
         
     }
-
+    
 }
 
 extension ShowBigImgView : UIAlertViewDelegate {
@@ -459,11 +459,11 @@ extension ShowBigImgView : UIAlertViewDelegate {
             alertView.dismiss(withClickedButtonIndex: buttonIndex, animated: true)
         }else if btnTitle == "去设置" {
             let url=URL.init(string: UIApplication.openSettingsURLString)
-
+            
             if UIApplication.shared.canOpenURL(url!){
-
+                
                 UIApplication.shared.open(url!, options: [:], completionHandler: { (ist) in
-
+                    
                 })
             }
         }
