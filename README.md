@@ -161,16 +161,8 @@ extension ShowBigImgView : UIScrollViewDelegate {
 ```
 6.调用
 ```
-    func showImg (imgs: [String],url: String) {
-        var number = 0
-        _ = imgs.enumerated().map { (index,urlStr) in
-            if urlStr == url {
-                number = index
-            }
-        }
-        
-        let show = ShowBigImgView(urlArr: imgs,number: number)
-        show.show(number: number)
-    }
+    let showController = ShowBigImgController(imgs: imgs, img: url)
+    showController.modalPresentationStyle = .overFullScreen
+    self.present(showController, animated: false, completion: nil)
 ```
 
