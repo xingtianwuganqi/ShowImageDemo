@@ -47,15 +47,9 @@ class ListViewController: UIViewController {
     }
     
     func showImg (imgs: [UIImage],img: UIImage) {
-        var number = 0
-        _ = imgs.enumerated().map { (index,image) in
-            if image == img {
-                number = index
-            }
-        }
-        
-        let show = ShowBigImgView(imgs, number: number)
-        show.show(number: number)
+        let controller = ShowBigImgController(imgs: imgs, img: img)
+        controller.modalPresentationStyle = .overFullScreen
+        self.present(controller, animated: false, completion: nil)
     }
 }
 extension ListViewController :UITableViewDelegate,UITableViewDataSource {

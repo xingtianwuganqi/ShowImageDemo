@@ -44,7 +44,7 @@ class HomePageController: UIViewController {
     }
     
     func showImg (imgs: [String],url: String) {
-        let showController = ShowBigImgController(imgs: imgs, img: url)
+        let showController = ShowBigImgController(urls: imgs, url: url)
         showController.modalPresentationStyle = .overFullScreen
         self.present(showController, animated: false, completion: nil)
     }

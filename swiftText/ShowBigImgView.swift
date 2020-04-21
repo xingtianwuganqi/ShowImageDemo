@@ -29,21 +29,10 @@ class ShowBigImgView: UIView {
         return view
     }()
     
-    //    lazy var numberLab : UILabel = {
-    //        let label = UILabel()
-    //        label.textColor = .white
-    //        label.font = UIFont.systemFont(ofSize: 14)
-    //        return label
-    //    }()
-    
-    //    lazy var downloadBtn : UIButton = {
-    //        let button = UIButton(type: .custom)
-    //        button.setImage(UIImage(named: "upload_download"), for: .normal)
-    //        button.setTitle("保存到相册", for: .normal)
-    //        button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-    //        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: -5, bottom: 0, right: 5)
-    //        return button
-    //    }()
+    lazy var pageControl : UIPageControl = {
+        let pageControl = UIPageControl.init()
+        return pageControl
+    }()
     
     
     lazy var loading : UILabel = {
@@ -59,11 +48,15 @@ class ShowBigImgView: UIView {
     
     var urlArr : [String] = []
     var imgArr : [UIImage] = []
+    ///URL初始化
     init(urlArr: [String],number: Int) {
         super.init(frame: .zero)
-        
         self.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
         self.backgroundColor = UIColor.black
+        showUrlScroll(urlArr: urlArr, number: number)
+    }
+    
+    private func showUrlScroll(urlArr: [String],number: Int) {
         self.urlArr = urlArr
         self.addSubview(backScroll)
         self.backScroll.delegate = self
@@ -128,18 +121,17 @@ class ShowBigImgView: UIView {
             tap.require(toFail: doubleTap)
             
         }
-        //        self.addSubview(numberLab)
         self.addSubview(loading)
         //        self.addSubview(downloadBtn)
-        
         self.addSubview(backBtn)
         
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
         //        downloadBtn.addTarget(self, action: #selector(downloadImage), for: .touchUpInside)
         
         self.backScroll.contentOffset.x = CGFloat(number) * ScreenW
-        //        self.numberLab.text = "\(number + 1)/\(urlArr.count)"
+        setPageControl(urlArr.count, current: number)
         setUI()
+        
     }
     
     init(_ Images: [UIImage],number: Int) {
@@ -147,6 +139,11 @@ class ShowBigImgView: UIView {
         
         self.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
         self.backgroundColor = UIColor.black
+        
+        self.showImages(Images: Images, number: number)
+    }
+    
+    private func showImages(Images: [UIImage],number: Int) {
         self.imgArr = Images
         self.addSubview(backScroll)
         self.backScroll.delegate = self
@@ -202,25 +199,20 @@ class ShowBigImgView: UIView {
             tap.require(toFail: doubleTap)
             
         }
-        //        self.addSubview(numberLab)
         self.addSubview(loading)
+        loading.isHidden = true
         //        self.addSubview(downloadBtn)
         
         self.addSubview(backBtn)
-        
         backBtn.addTarget(self, action: #selector(backBtnClick), for: .touchUpInside)
         //        downloadBtn.addTarget(self, action: #selector(downloadImage), for: .touchUpInside)
-        
         self.backScroll.contentOffset.x = CGFloat(number) * ScreenW
-        //        self.numberLab.text = "\(number + 1)/\(Images.count)"
+        setPageControl(imgArr.count, current: number)
         setUI()
     }
+
     
-    func show(number:Int) {
-        UIApplication.shared.keyWindow?.addSubview(self)
-        self.pushAnimation(num: number)
-    }
-    
+    /// 弹出动画
     func pushAnimation(num: Int) {
         
         // 获取UIImageView()
@@ -231,32 +223,27 @@ class ShowBigImgView: UIView {
         
     }
     
-    func setUI() {
+    private func setUI() {
         backBtn.snp.makeConstraints { (make) in
             make.left.equalToSuperview().offset(5)
             make.top.equalToSuperview().offset(44)
             make.size.equalTo(CGSize(width: 40, height: 40))
         }
         
-        //        numberLab.snp.makeConstraints { (make) in
-        //            make.left.equalToSuperview().offset(20)
-        //            if #available(iOS 11.0, *) {
-        //                make.bottom.equalTo(self.safeAreaLayoutGuide.snp.bottom).offset(-20)
-        //            } else {
-        //                make.bottom.equalToSuperview().offset(-20)
-        //            }
-        //        }
-        
-        //        downloadBtn.snp.makeConstraints { (make) in
-        //            make.right.equalToSuperview().offset(-20)
-        //            make.centerY.equalTo(numberLab)
-        //            make.size.equalTo(CGSize(width: 85, height: 20))
-        //        }
-        
         loading.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.centerX.equalToSuperview()
         }
+    }
+    
+    private func setPageControl(_ total: Int,current: Int) {
+        self.addSubview(self.pageControl)
+        self.pageControl.frame = CGRect(x: 0, y: ScreenH - 80, width: ScreenW, height: 30)
+        self.pageControl.numberOfPages = total
+        self.pageControl.currentPage = current
+        self.pageControl.currentPageIndicatorTintColor = UIColor.white
+        self.pageControl.pageIndicatorTintColor = UIColor.lightGray
+        self.pageControl.hidesForSinglePage = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -266,6 +253,9 @@ class ShowBigImgView: UIView {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.backBtnClick()
     }
+}
+// MARK: 点击的方法
+extension ShowBigImgView {
     
     @objc func backBtnClick() {
         self.removeAnimation()
@@ -315,12 +305,13 @@ class ShowBigImgView: UIView {
         }
         
         guard let img = imageview.image else {
-            return 
+            return
         }
         UIImageWriteToSavedPhotosAlbum(img, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
-    
 }
+
+//MARK: UIScrollViewDelegate
 extension ShowBigImgView : UIScrollViewDelegate {
     // 当scrollview 尝试进行缩放的时候
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
@@ -336,15 +327,11 @@ extension ShowBigImgView : UIScrollViewDelegate {
     
     // 当正在缩放的时候
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        
-        
         let offsetX = self.backScroll.contentOffset.x
         let tagValue = offsetX / ScreenW
-        
         //获取到这个scrollview
         var centerX = self.backScroll.center.x
         var centerY = self.backScroll.center.y
-        
         centerX = scrollView.contentSize.width > scrollView.frame.size.width ?
             scrollView.contentSize.width/2:centerX
         centerY = scrollView.contentSize.height > scrollView.frame.size.height ?
@@ -352,20 +339,16 @@ extension ShowBigImgView : UIScrollViewDelegate {
         scrollView.viewWithTag(100 + Int(tagValue))?.center = CGPoint(x: centerX, y: centerY)
     }
     
-    //    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    //        if scrollView == self.backScroll {
-    //            let offsetX = self.backScroll.contentOffset.x
-    //            let tagValue = offsetX / ScreenW
-    //            if urlArr.count == 0 {
-    //                self.numberLab.text = "\(Int(tagValue) + 1)/\(imgArr.count)"
-    //            }else{
-    //                self.numberLab.text = "\(Int(tagValue) + 1)/\(urlArr.count)"
-    //            }
-    //        }
-    //    }
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == self.backScroll {
+            let offsetX = self.backScroll.contentOffset.x
+            let tagValue = offsetX / ScreenW
+            self.pageControl.currentPage = Int(tagValue)
+        }
+    }
     
 }
-/// 动画
+//MARK: 动画
 extension ShowBigImgView {
     // 缩放动画
     func transformAnimation(animationView: UIImageView) {
@@ -391,8 +374,7 @@ extension ShowBigImgView {
         guard let imageView = self.backScroll.viewWithTag(tag) else {
             return
         }
-        
-        
+
         let scale = CABasicAnimation()
         scale.keyPath = "transform.scale"
         scale.fromValue = 1.0
@@ -431,41 +413,12 @@ extension ShowBigImgView : UIAlertViewDelegate {
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
             if error.localizedDescription == "数据不可用" {
-                openSystemSettingPhotoLibrary(type: "add")
+                print(error.localizedDescription)
             }else{
                 print(error.localizedDescription)
             }
         } else {
             print("保存到相册")
-        }
-    }
-    
-    func openSystemSettingPhotoLibrary(type:String) {
-        var destri = ""
-        if type == "add" {
-            destri = "加入"
-        }else{
-            destri = "访问"
-        }
-        
-        
-        let alertView = UIAlertView(title: "未获得权限访问您的照片", message: "请在设置选项中允许720yun\(destri)您的照片", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "去设置")
-        alertView.show()
-    }
-    
-    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
-        let btnTitle = alertView.buttonTitle(at: buttonIndex)
-        if btnTitle == "取消" {
-            alertView.dismiss(withClickedButtonIndex: buttonIndex, animated: true)
-        }else if btnTitle == "去设置" {
-            let url=URL.init(string: UIApplication.openSettingsURLString)
-            
-            if UIApplication.shared.canOpenURL(url!){
-                
-                UIApplication.shared.open(url!, options: [:], completionHandler: { (ist) in
-                    
-                })
-            }
         }
     }
 }
