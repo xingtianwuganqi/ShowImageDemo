@@ -10,4 +10,5 @@
 #define Header_h
 
 #import <SDWebImage/UIImageView+WebCache.h>
+#import "JYCPanView.h"
 #endif /* Header_h */
