@@ -9,27 +9,52 @@
 import UIKit
 
 class UserInfoController: UIViewController {
+    
+    lazy var imageview : UIImageView = {
+        let backview = UIImageView()
+        backview.image = UIImage(named: "head.jpg")
+        return backview
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.blue
-        // Do any additional setup after loading the view.
+        view.backgroundColor = UIColor.white
+        
+        setFrame()
+    }
+    
+    func setFrame() {
+        let imgW = ScreenW
+        let imgH = ScreenW * (self.imageview.image?.size.height ?? 0) / (self.imageview.image?.size.width ?? 0)
+        let y = (ScreenH - imgH) / 2
+        self.view.addSubview(self.imageview)
+        self.imageview.frame = CGRect(x: 0, y: y, width: imgW, height: imgH)
     }
 
+    func addPanGesture() {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(panRecognizerAction(pan:)))
+        self.imageview.addGestureRecognizer(pan)
+        pan.delegate = self
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @objc func panRecognizerAction(pan:UIPanGestureRecognizer) {
+        
     }
-    */
 
+    
+
+}
+
+extension UserInfoController : UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
+    
 }

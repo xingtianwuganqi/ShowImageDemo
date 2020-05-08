@@ -26,6 +26,7 @@
 		C4A1C0B02134EFB900714601 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A1C0AF2134EFB900714601 /* ListViewController.swift */; };
 		C4A1C0B22134EFE000714601 /* UserInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A1C0B12134EFE000714601 /* UserInfoController.swift */; };
 		C4A3082223A0FB6800E3A312 /* long.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4A3082123A0FB6800E3A312 /* long.jpg */; };
+		C4E053B324654A5C00DF5DC9 /* JYCPanView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E053B224654A5C00DF5DC9 /* JYCPanView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,8 @@
 		C4A1C0B12134EFE000714601 /* UserInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoController.swift; sourceTree = "<group>"; };
 		C4A3082123A0FB6800E3A312 /* long.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = long.jpg; sourceTree = "<group>"; };
 		C4C4B5A01FFA36AF00399DB1 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		C4E053B124654A5C00DF5DC9 /* JYCPanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYCPanView.h; sourceTree = "<group>"; };
+		C4E053B224654A5C00DF5DC9 /* JYCPanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYCPanView.m; sourceTree = "<group>"; };
 		FCF3F2CDBD897392154221E1 /* Pods-swiftText.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftText.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftText/Pods-swiftText.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +118,8 @@
 				C4A1C0AD2134EFA600714601 /* HomePageController.swift */,
 				C4A1C0AF2134EFB900714601 /* ListViewController.swift */,
 				C4A1C0B12134EFE000714601 /* UserInfoController.swift */,
+				C4E053B124654A5C00DF5DC9 /* JYCPanView.h */,
+				C4E053B224654A5C00DF5DC9 /* JYCPanView.m */,
 				C498314A239B8AAA00BF67F9 /* 16a521d332df104d.jpg */,
 				C498314C239B8AAB00BF67F9 /* avator.png */,
 				C498314B239B8AAA00BF67F9 /* head.jpg */,
@@ -261,6 +266,7 @@
 				C4A1C0B22134EFE000714601 /* UserInfoController.swift in Sources */,
 				C40F67C61FC71C75004A7868 /* ViewController.swift in Sources */,
 				C40F67CC1FC71C75004A7868 /* swiftText.xcdatamodeld in Sources */,
+				C4E053B324654A5C00DF5DC9 /* JYCPanView.m in Sources */,
 				C44EF7EB238C0F8800BD2C9C /* commont.swift in Sources */,
 				C44EF7E7238C03C400BD2C9C /* YUNNavigationController.swift in Sources */,
 				C4A1C0B02134EFB900714601 /* ListViewController.swift in Sources */,
@@ -411,7 +417,7 @@
 				GCC_PREFIX_HEADER = /Users/jingjun/Desktop/SwiftDemo/AttributedStringDemo/swiftText/Header.h;
 				INFOPLIST_FILE = swiftText/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jingjun.swiftText;
+				PRODUCT_BUNDLE_IDENTIFIER = com.720yun.AMapDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SWIFT_OBJC_BRIDGING_HEADER = swiftText/Header.h;
@@ -430,7 +436,7 @@
 				GCC_PREFIX_HEADER = /Users/jingjun/Desktop/SwiftDemo/AttributedStringDemo/swiftText/Header.h;
 				INFOPLIST_FILE = swiftText/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.jingjun.swiftText;
+				PRODUCT_BUNDLE_IDENTIFIER = com.720yun.AMapDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SWIFT_OBJC_BRIDGING_HEADER = swiftText/Header.h;
