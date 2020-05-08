@@ -47,7 +47,7 @@ class UserInfoController: UIViewController {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(panRecognizerAction(pan:)))
         self.imageview.addGestureRecognizer(pan)
         self.imageview.isUserInteractionEnabled = true
-        pan.delegate = self
+//        pan.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -107,13 +107,4 @@ class UserInfoController: UIViewController {
 
     
 
-}
-
-extension UserInfoController : UIGestureRecognizerDelegate {
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        
-        return true
-    }
-    
-    
 }
