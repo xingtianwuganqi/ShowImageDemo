@@ -188,7 +188,7 @@ class ShowBigImgView: UIView {
         setPageControl(imgArr.count, current: number)
         setUI()
     }
-
+    
     
     /// 弹出动画
     func pushAnimation(num: Int) {
@@ -353,7 +353,7 @@ extension ShowBigImgView {
         guard let imageView = self.backScroll.viewWithTag(tag) else {
             return
         }
-
+        
         let scale = CABasicAnimation()
         scale.keyPath = "transform.scale"
         scale.fromValue = 1.0
@@ -460,7 +460,7 @@ extension ShowBigImgView: UIGestureRecognizerDelegate {
         pan.delegate = self
     }
     
-     @objc func panRecognizerAction(pan:UIPanGestureRecognizer) {
+    @objc func panRecognizerAction(pan:UIPanGestureRecognizer) {
         guard let imageview = pan.view else {
             return
         }
@@ -473,9 +473,9 @@ extension ShowBigImgView: UIGestureRecognizerDelegate {
             pan.setTranslation(.zero, in: imgSuperView)
             print("Change Frame: ",imageview.frame)
             // 滑动时改变背景透明度
-//            let alphaScale = abs(imageview.center.y - ScreenH / 2)
-//            print("alphaScale: ",alphaScale)
-//            self.backView.backgroundColor = UIColor.black.withAlphaComponent((ScreenH - CGFloat(alphaScale)) / ScreenH)
+            //            let alphaScale = abs(imageview.center.y - ScreenH / 2)
+            //            print("alphaScale: ",alphaScale)
+            //            self.backView.backgroundColor = UIColor.black.withAlphaComponent((ScreenH - CGFloat(alphaScale)) / ScreenH)
         }else if pan.state == .ended {
             
             // 如果偏移量大于某个值，直接划走消失，否则回归原位
@@ -505,6 +505,10 @@ extension ShowBigImgView: UIGestureRecognizerDelegate {
         guard panView.frame.size.width == self.ScreenW else{
             return false
         }
+        // 长图不支持
+        guard panView.frame.size.height <= ScreenH else{
+            return false
+        }
         if gestureRecognizer.isKind(of: UIPanGestureRecognizer.self) {
             let panGesture = gestureRecognizer as! UIPanGestureRecognizer
             let offset = panGesture.translation(in: panView)
@@ -522,7 +526,7 @@ extension ShowBigImgView: UIGestureRecognizerDelegate {
             // 向上划走消失
             let imgW = ScreenW
             let imgH = ScreenW * (imageview.frame.size.height) / (imageview.frame.size.width)
-
+            
             UIView.animate(withDuration: duration) {
                 imageview.frame = CGRect(x: 0, y: -imgH , width: imgW, height: imgH)
             }
@@ -532,7 +536,7 @@ extension ShowBigImgView: UIGestureRecognizerDelegate {
             // 向下划走消失
             let imgW = ScreenW
             let imgH = ScreenW * (imageview.frame.size.height) / (imageview.frame.size.width)
-
+            
             UIView.animate(withDuration: duration) {
                 imageview.frame = CGRect(x: 0, y: self.ScreenH, width: imgW, height: imgH)
             }
