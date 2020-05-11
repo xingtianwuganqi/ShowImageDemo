@@ -106,20 +106,9 @@ class ShowBigImgView: UIView {
             }
             imageview.tag = 100 + i
             
-            imageview.isUserInteractionEnabled = true
-            scroll.isUserInteractionEnabled = true
-            let doubleTap = UITapGestureRecognizer(target: self, action: #selector(imageClick(tap:)))
-            doubleTap.numberOfTapsRequired = 2
-            imageview.addGestureRecognizer(doubleTap)
+            self.addTapGesture(imageview: imageview, scroll: scroll)
             
-            let tap = UITapGestureRecognizer(target: self, action: #selector(viewClick(tap:)))
-            tap.numberOfTapsRequired = 1
-            tap.numberOfTouchesRequired = 1
-            imageview.addGestureRecognizer(tap)
-            scroll.addGestureRecognizer(tap)
-            
-            tap.require(toFail: doubleTap)
-            
+            self.addPanGesture(imageview)
         }
         self.addSubview(loading)
         //        self.addSubview(downloadBtn)
@@ -184,20 +173,9 @@ class ShowBigImgView: UIView {
             
             imageview.tag = 100 + i
             
-            imageview.isUserInteractionEnabled = true
-            scroll.isUserInteractionEnabled = true
-            let doubleTap = UITapGestureRecognizer(target: self, action: #selector(imageClick(tap:)))
-            doubleTap.numberOfTapsRequired = 2
-            imageview.addGestureRecognizer(doubleTap)
+            self.addTapGesture(imageview: imageview, scroll: scroll)
             
-            let tap = UITapGestureRecognizer(target: self, action: #selector(viewClick(tap:)))
-            tap.numberOfTapsRequired = 1
-            tap.numberOfTouchesRequired = 1
-            imageview.addGestureRecognizer(tap)
-            scroll.addGestureRecognizer(tap)
-            
-            tap.require(toFail: doubleTap)
-            
+            self.addPanGesture(imageview)
         }
         self.addSubview(loading)
         loading.isHidden = true
@@ -259,9 +237,6 @@ extension ShowBigImgView {
     
     @objc func backBtnClick() {
         self.removeAnimation()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.dismissCallBack?()
-        }
     }
     
     @objc func imageClick(tap:UITapGestureRecognizer) {
@@ -322,6 +297,10 @@ extension ShowBigImgView : UIScrollViewDelegate {
     
     // 当缩放完毕的时候调用
     func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+        
+    }
+    // 将要开始缩放
+    func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
         
     }
     
@@ -385,8 +364,33 @@ extension ShowBigImgView {
         imageView.layer.add(scale, forKey: nil)
         
         let backAnimation = CAKeyframeAnimation()
+        backAnimation.delegate = self
         backAnimation.keyPath = "opacity"
         backAnimation.duration = 0.4
+        backAnimation.values = [
+            NSNumber(value: 0.90 as Float),
+            NSNumber(value: 0.60 as Float),
+            NSNumber(value: 0.30 as Float),
+            NSNumber(value: 0.0 as Float),
+        ]
+        backAnimation.keyTimes = [
+            NSNumber(value: 0.1),
+            NSNumber(value: 0.2),
+            NSNumber(value: 0.3),
+            NSNumber(value: 0.4)
+        ]
+        backAnimation.fillMode = CAMediaTimingFillMode.forwards
+        backAnimation.isRemovedOnCompletion = false
+        self.layer.add(backAnimation, forKey: nil)
+        
+    }
+    
+    // 背景变淡消失的动画
+    func backRemoveAnimation(_ duration: CFTimeInterval) {
+        let backAnimation = CAKeyframeAnimation()
+        backAnimation.delegate = self
+        backAnimation.keyPath = "opacity"
+        backAnimation.duration = duration
         backAnimation.values = [
             NSNumber(value: 0.90 as Float),
             NSNumber(value: 0.60 as Float),
@@ -403,9 +407,16 @@ extension ShowBigImgView {
         backAnimation.fillMode = CAMediaTimingFillMode.forwards
         backAnimation.isRemovedOnCompletion = false
         self.layer.add(backAnimation, forKey: nil)
-        
     }
     
+}
+// MARK: 动画代理
+extension ShowBigImgView: CAAnimationDelegate {
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        if anim.isKind(of: CAKeyframeAnimation.self) && flag {
+            self.dismissCallBack?()
+        }
+    }
 }
 
 extension ShowBigImgView : UIAlertViewDelegate {
@@ -419,6 +430,114 @@ extension ShowBigImgView : UIAlertViewDelegate {
             }
         } else {
             print("保存到相册")
+        }
+    }
+}
+
+// MARK: 添加手势
+extension ShowBigImgView: UIGestureRecognizerDelegate {
+    // 点击手势
+    func addTapGesture(imageview: UIImageView,scroll: UIScrollView) {
+        imageview.isUserInteractionEnabled = true
+        scroll.isUserInteractionEnabled = true
+        let doubleTap = UITapGestureRecognizer(target: self, action: #selector(imageClick(tap:)))
+        doubleTap.numberOfTapsRequired = 2
+        imageview.addGestureRecognizer(doubleTap)
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(viewClick(tap:)))
+        tap.numberOfTapsRequired = 1
+        tap.numberOfTouchesRequired = 1
+        imageview.addGestureRecognizer(tap)
+        scroll.addGestureRecognizer(tap)
+        
+        tap.require(toFail: doubleTap)
+    }
+    // 拖动手势
+    func addPanGesture(_ imgView: UIView) {
+        let pan = UIPanGestureRecognizer(target: self, action: #selector(panRecognizerAction(pan:)))
+        imgView.addGestureRecognizer(pan)
+        imgView.isUserInteractionEnabled = true
+        pan.delegate = self
+    }
+    
+     @objc func panRecognizerAction(pan:UIPanGestureRecognizer) {
+        guard let imageview = pan.view else {
+            return
+        }
+        guard let imgSuperView = imageview.superview else {
+            return
+        }
+        let translation = pan.translation(in: imageview)
+        if pan.state == .changed {
+            imageview.center = CGPoint(x: imageview.center.x, y: imageview.center.y + translation.y)
+            pan.setTranslation(.zero, in: imgSuperView)
+            print("Change Frame: ",imageview.frame)
+            // 滑动时改变背景透明度
+//            let alphaScale = abs(imageview.center.y - ScreenH / 2)
+//            print("alphaScale: ",alphaScale)
+//            self.backView.backgroundColor = UIColor.black.withAlphaComponent((ScreenH - CGFloat(alphaScale)) / ScreenH)
+        }else if pan.state == .ended {
+            
+            // 如果偏移量大于某个值，直接划走消失，否则回归原位
+            if imageview.center.y > ScreenH / 2 + 50 {
+                self.imagePanRemoveAnimation(false, imageview: imageview)
+            }else if imageview.center.y < ScreenH / 2 - 50 {
+                self.imagePanRemoveAnimation(true, imageview: imageview)
+            }else{
+                // 回复原位
+                let imgW = ScreenW
+                let imgH = ScreenW * (imageview.frame.size.height) / (imageview.frame.size.width)
+                let y = (ScreenH - imgH) / 2
+                UIView.animate(withDuration: 0.3) {
+                    imageview.frame = CGRect(x: 0, y: y, width: imgW, height: imgH)
+                }
+            }
+            
+        }
+    }
+    
+    // 只允许上下起作用
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let panView = gestureRecognizer.view else {
+            return false
+        }
+        // 正在缩放的view，不支持手势
+        guard panView.frame.size.width == self.ScreenW else{
+            return false
+        }
+        if gestureRecognizer.isKind(of: UIPanGestureRecognizer.self) {
+            let panGesture = gestureRecognizer as! UIPanGestureRecognizer
+            let offset = panGesture.translation(in: panView)
+            if offset.x == 0 && offset.y != 0 {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    func imagePanRemoveAnimation(_ isTop: Bool,imageview: UIView) {
+        let duration = 0.4
+        if isTop {
+            // 向上划走消失
+            let imgW = ScreenW
+            let imgH = ScreenW * (imageview.frame.size.height) / (imageview.frame.size.width)
+
+            UIView.animate(withDuration: duration) {
+                imageview.frame = CGRect(x: 0, y: -imgH , width: imgW, height: imgH)
+            }
+            
+            self.backRemoveAnimation(duration)
+        }else{
+            // 向下划走消失
+            let imgW = ScreenW
+            let imgH = ScreenW * (imageview.frame.size.height) / (imageview.frame.size.width)
+
+            UIView.animate(withDuration: duration) {
+                imageview.frame = CGRect(x: 0, y: self.ScreenH, width: imgW, height: imgH)
+            }
+            
+            self.backRemoveAnimation(duration)
         }
     }
 }

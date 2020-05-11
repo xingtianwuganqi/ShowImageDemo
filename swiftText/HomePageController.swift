@@ -38,7 +38,11 @@ class HomePageController: UIViewController {
     func setUI() {
         self.view.addSubview(self.tableview)
         tableview.snp.makeConstraints { (make) in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            if #available(iOS 11.0, *) {
+                make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            } else {
+                make.top.equalToSuperview()
+            }
             make.left.right.bottom.equalToSuperview()
         }
     }

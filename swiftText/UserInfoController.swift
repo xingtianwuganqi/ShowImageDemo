@@ -47,7 +47,7 @@ class UserInfoController: UIViewController {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(panRecognizerAction(pan:)))
         self.imageview.addGestureRecognizer(pan)
         self.imageview.isUserInteractionEnabled = true
-//        pan.delegate = self
+        pan.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
@@ -104,7 +104,22 @@ class UserInfoController: UIViewController {
             
         }
     }
+}
 
-    
-
+extension UserInfoController : UIGestureRecognizerDelegate {
+    // 只允许上下起作用
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        guard let panView = gestureRecognizer.view else {
+            return false
+        }
+        if gestureRecognizer.isKind(of: UIPanGestureRecognizer.self) {
+            let panGesture = gestureRecognizer as! UIPanGestureRecognizer
+            let offset = panGesture.translation(in: panView)
+            if offset.x == 0 && offset.y != 0 {
+                return true
+            }
+        }
+        
+        return false
+    }
 }
