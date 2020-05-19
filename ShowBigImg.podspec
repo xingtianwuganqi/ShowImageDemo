@@ -30,6 +30,6 @@ Pod::Spec.new do |spec|
   spec.source_files  = "swiftText/ShowBigImgController.swift","swiftText/ShowBigImgView.swift"
 
   spec.frameworks = "Foundation","UIKit"
-  spec.ios.dependency 'SDWebImage', '~> 4.3.3'
+  spec.ios.dependency 'SDWebImage'
 
 end
