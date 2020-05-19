@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ShowBigImgView: UIView {
     
@@ -202,16 +203,15 @@ class ShowBigImgView: UIView {
     }
     
     private func setUI() {
-        backBtn.snp.makeConstraints { (make) in
-            make.left.equalToSuperview().offset(5)
-            make.top.equalToSuperview().offset(44)
-            make.size.equalTo(CGSize(width: 40, height: 40))
-        }
+        backBtn.translatesAutoresizingMaskIntoConstraints = false
+        backBtn.leadingAnchor.constraint(equalTo: self.leadingAnchor,constant: 5).isActive = true
+        backBtn.topAnchor.constraint(equalTo: self.topAnchor,constant: 44).isActive = true
+        backBtn.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        backBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
-        loading.snp.makeConstraints { (make) in
-            make.centerY.equalToSuperview()
-            make.centerX.equalToSuperview()
-        }
+        loading.translatesAutoresizingMaskIntoConstraints = false
+        loading.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        loading.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     }
     
     private func setPageControl(_ total: Int,current: Int) {
@@ -543,5 +543,18 @@ extension ShowBigImgView: UIGestureRecognizerDelegate {
             
             self.backRemoveAnimation(duration)
         }
+    }
+}
+
+extension UIImage {
+    static func imageWithColor(color: UIColor) -> UIImage? {
+        let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image ?? nil
     }
 }
