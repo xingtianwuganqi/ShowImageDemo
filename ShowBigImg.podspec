@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
 
   spec.platform     = :ios, "10.0"
 
-  spec.source       = { :git => "https://github.com/xingtianwuganqi/ShowImageDemo.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/xingtianwuganqi/ShowImageDemo.git,https://github.com/CocoaPods/Specs.git", :tag => "#{spec.version}" }
 
   spec.source_files  = "swiftText/ShowBigImgController.swift","swiftText/ShowBigImgView.swift"
 
