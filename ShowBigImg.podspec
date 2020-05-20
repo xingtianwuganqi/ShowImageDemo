@@ -9,7 +9,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "ShowBigImg"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.2"
   spec.summary      = "仿微信朋友圈查看图片"
   
   spec.description  = <<-DESC
@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
 
   spec.platform     = :ios, "10.0"
 
-  spec.source       = { :git => "https://github.com/xingtianwuganqi/ShowImageDemo.git,https://github.com/CocoaPods/Specs.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/xingtianwuganqi/ShowImageDemo.git", :tag => "#{spec.version}" }
 
   spec.source_files  = "swiftText/ShowBigImgController.swift","swiftText/ShowBigImgView.swift"
 
