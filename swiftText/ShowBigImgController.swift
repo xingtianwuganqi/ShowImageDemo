@@ -8,10 +8,10 @@
 
 import UIKit
 
-class ShowBigImgController: UIViewController {
+public class ShowBigImgController: UIViewController {
     
-    private var showView: ShowBigImgView?
-    private var number: Int
+    internal var showView: ShowBigImgView?
+    internal var number: Int
     init(imgs: [UIImage],img: UIImage) {
         var number = 0
         _ = imgs.enumerated().map { (index,urlStr) in
@@ -40,7 +40,7 @@ class ShowBigImgController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .clear
         self.view.addSubview(self.showView!)
@@ -50,7 +50,7 @@ class ShowBigImgController: UIViewController {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.showView?.pushAnimation(num: self.number)
     }

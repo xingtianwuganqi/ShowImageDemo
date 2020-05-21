@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class ShowBigImgView: UIView {
+public class ShowBigImgView: UIView {
     
     let ScreenW = UIScreen.main.bounds.size.width
     let ScreenH = UIScreen.main.bounds.size.height
@@ -228,7 +228,7 @@ class ShowBigImgView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.backBtnClick()
     }
 }
@@ -289,23 +289,23 @@ extension ShowBigImgView {
 //MARK: UIScrollViewDelegate
 extension ShowBigImgView : UIScrollViewDelegate {
     // 当scrollview 尝试进行缩放的时候
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+    public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         let offsetX = self.backScroll.contentOffset.x
         let tagValue = offsetX / ScreenW
         return self.backScroll.viewWithTag(Int(tagValue))?.viewWithTag(100 + Int(tagValue))
     }
     
     // 当缩放完毕的时候调用
-    func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
+    public func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
         
     }
     // 将要开始缩放
-    func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
+    public func scrollViewWillBeginZooming(_ scrollView: UIScrollView, with view: UIView?) {
         
     }
     
     // 当正在缩放的时候
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+    public func scrollViewDidZoom(_ scrollView: UIScrollView) {
         let offsetX = self.backScroll.contentOffset.x
         let tagValue = offsetX / ScreenW
         //获取到这个scrollview
@@ -318,7 +318,7 @@ extension ShowBigImgView : UIScrollViewDelegate {
         scrollView.viewWithTag(100 + Int(tagValue))?.center = CGPoint(x: centerX, y: centerY)
     }
     
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         if scrollView == self.backScroll {
             let offsetX = self.backScroll.contentOffset.x
             let tagValue = offsetX / ScreenW
@@ -412,7 +412,7 @@ extension ShowBigImgView {
 }
 // MARK: 动画代理
 extension ShowBigImgView: CAAnimationDelegate {
-    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+    public func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         if anim.isKind(of: CAKeyframeAnimation.self) && flag {
             self.dismissCallBack?()
         }
@@ -497,7 +497,7 @@ extension ShowBigImgView: UIGestureRecognizerDelegate {
     }
     
     // 只允许上下起作用
-    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    public override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         guard let panView = gestureRecognizer.view else {
             return false
         }
