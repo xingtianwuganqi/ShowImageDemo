@@ -12,7 +12,7 @@ public class ShowBigImgController: UIViewController {
     
     internal var showView: ShowBigImgView?
     internal var number: Int
-    init(imgs: [UIImage],img: UIImage) {
+    public init(imgs: [UIImage],img: UIImage) {
         var number = 0
         _ = imgs.enumerated().map { (index,urlStr) in
             if urlStr == img {
@@ -24,7 +24,7 @@ public class ShowBigImgController: UIViewController {
         super.init(nibName: nil, bundle: nil)
     }
     
-    init(urls: [String],url: String) {
+    public init(urls: [String],url: String) {
         var number = 0
         _ = urls.enumerated().map { (index,urlStr) in
             if urlStr == url {
