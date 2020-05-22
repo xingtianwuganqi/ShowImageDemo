@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Then
 
 class YUNNavigationController: UINavigationController,UIGestureRecognizerDelegate{
     

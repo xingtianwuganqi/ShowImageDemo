@@ -424,12 +424,12 @@ extension ShowBigImgView : UIAlertViewDelegate {
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
         if let error = error {
             if error.localizedDescription == "数据不可用" {
-                print(error.localizedDescription)
+//                print(error.localizedDescription)
             }else{
-                print(error.localizedDescription)
+//                print(error.localizedDescription)
             }
         } else {
-            print("保存到相册")
+//            print("保存到相册")
         }
     }
 }
@@ -471,7 +471,7 @@ extension ShowBigImgView: UIGestureRecognizerDelegate {
         if pan.state == .changed {
             imageview.center = CGPoint(x: imageview.center.x, y: imageview.center.y + translation.y)
             pan.setTranslation(.zero, in: imgSuperView)
-            print("Change Frame: ",imageview.frame)
+//            print("Change Frame: ",imageview.frame)
             // 滑动时改变背景透明度
             //            let alphaScale = abs(imageview.center.y - ScreenH / 2)
             //            print("alphaScale: ",alphaScale)
