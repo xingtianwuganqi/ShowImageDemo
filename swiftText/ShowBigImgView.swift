@@ -50,7 +50,7 @@ public class ShowBigImgView: UIView {
     var urlArr : [String] = []
     var imgArr : [UIImage] = []
     ///URL初始化
-    init(urlArr: [String],number: Int) {
+    public init(urlArr: [String],number: Int) {
         super.init(frame: .zero)
         self.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
         self.backgroundColor = UIColor.black
@@ -124,7 +124,7 @@ public class ShowBigImgView: UIView {
         
     }
     
-    init(_ Images: [UIImage],number: Int) {
+    public init(_ Images: [UIImage],number: Int) {
         super.init(frame: .zero)
         
         self.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
