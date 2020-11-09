@@ -7,9 +7,7 @@
 //
 
 import UIKit
-//宏
-let ScreenW = UIApplication.shared.statusBarOrientation.isLandscape ? UIScreen.main.bounds.size.height : UIScreen.main.bounds.size.width
-let ScreenH = UIApplication.shared.statusBarOrientation.isLandscape ? UIScreen.main.bounds.size.width : UIScreen.main.bounds.size.height
+
 let Bold    = "PingFangSC-Semibold"
 let Medium  = "PingFangSC-Medium"
 let Regular = "PingFangSC-Regular"

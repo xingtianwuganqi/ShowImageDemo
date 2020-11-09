@@ -10,7 +10,7 @@ import UIKit
 
 public class ShowBigImgController: UIViewController {
     
-    internal var showView: ShowBigImgView?
+    internal var showView: ShowBigImgBackView?
     internal var number: Int
     public init(imgs: [UIImage],img: UIImage) {
         var number = 0
@@ -20,7 +20,7 @@ public class ShowBigImgController: UIViewController {
             }
         }
         self.number = number
-        self.showView = ShowBigImgView(imgs, number: number)
+        self.showView = ShowBigImgBackView(imgArr: imgs, number: number)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -32,7 +32,7 @@ public class ShowBigImgController: UIViewController {
             }
         }
         self.number = number
-        self.showView = ShowBigImgView.init(urlArr: urls, number: number)
+        self.showView = ShowBigImgBackView.init(urlArr: urls, number: number)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -52,10 +52,10 @@ public class ShowBigImgController: UIViewController {
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.showView?.pushAnimation(num: self.number)
+        self.showView?.transformAnimation(num: self.number)
     }
     
     deinit {
-//        print("ShowController Deinit")
+        print("ShowController Deinit")
     }
 }
