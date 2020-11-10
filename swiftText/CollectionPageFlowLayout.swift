@@ -10,7 +10,6 @@ import UIKit
 
 public class CollectionPageFlowLayout: UICollectionViewFlowLayout {
     
-    public var scrollAnimation: Bool? /**<是否有分页动画*/
     public var lastOffset: CGPoint /**<记录上次滑动停止时contentOffset值*/
     
     public override init() {
@@ -24,15 +23,14 @@ public class CollectionPageFlowLayout: UICollectionViewFlowLayout {
     
     public override func prepare() {
         super.prepare()
-        
-        /*
-         self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
-         */
+
         /**
          * decelerationRate系统给出了2个值：
          * 1. UIScrollViewDecelerationRateFast（速率快）
          * 2. UIScrollViewDecelerationRateNormal（速率慢）
          * 此处设置滚动加速度率为fast，这样在移动cell后就会出现明显的吸附效果
+         *
+         *self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
          */
         // 设置lastOffset初始值
         self.lastOffset = self.collectionView?.contentOffset ?? .zero

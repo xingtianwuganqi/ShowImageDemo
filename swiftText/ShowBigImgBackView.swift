@@ -26,7 +26,7 @@ public class ShowBigImgBackView: UIView {
     }()
     
     lazy var collectionView : UICollectionView = {
-        let layout = CollectionPageFlowLayout.init()
+        let layout = CollectionPageFlowLayout.init() // 给分页添加间距
         layout.sectionHeadersPinToVisibleBounds = true
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10
@@ -140,6 +140,10 @@ extension ShowBigImgBackView: UICollectionViewDelegate,UICollectionViewDataSourc
             guard let `self` = self else { return }
             self.removeAnimation(imgView)
         }
+        cell.changeAlphaCallBack = { [weak self] (alpha) in
+            guard let `self` = self else { return }
+            self.changeBackAlpha(alpha: alpha)
+        }
         return cell
     }
     
@@ -161,7 +165,10 @@ extension ShowBigImgBackView {
 //MARK: 动画
 extension ShowBigImgBackView {
 
-    func transformAnimation(num: Int) {
+    /*
+     视图将要显示时获取到第一次要显示的cell上的imgView来显示动画
+     */
+    func transformAnimation() {
         // 第一次弹出时的动画
         collectionView.reloadData()
         collectionView.layoutIfNeeded()
@@ -172,6 +179,34 @@ extension ShowBigImgBackView {
             return
         }
         
+        self.showAnimation()
+        
+        self.transformScaleAnimation(fromValue: 0.3, toValue: 1, duration: 0.3, view: cell.imgView)
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+            // 赋值方法中imageview重新布局
+            self.collectionView.reloadData()
+        }
+    }
+    
+    // 缩放 + 淡入淡出
+    func removeAnimation(_ imgView: UIImageView) {
+        self.transformScaleAnimation(fromValue: 1.0, toValue: 0.3, duration: 0.3, view: imgView)
+        self.backRemoveAnimation(duration)
+    }
+    
+    // 缩放
+    func transformScaleAnimation(fromValue: CGFloat,toValue: CGFloat,duration: CFTimeInterval,view: UIView) {
+        let scale = CABasicAnimation()
+        scale.keyPath = "transform.scale"
+        scale.fromValue = fromValue
+        scale.toValue = toValue
+        scale.duration = duration
+        scale.fillMode = CAMediaTimingFillMode.forwards
+        scale.isRemovedOnCompletion = false
+        view.layer.add(scale, forKey: nil)
+    }
+    
+    func showAnimation() {
         let backAnimation = CAKeyframeAnimation()
         backAnimation.keyPath = "opacity"
         backAnimation.duration = duration
@@ -190,26 +225,6 @@ extension ShowBigImgBackView {
         backAnimation.fillMode = CAMediaTimingFillMode.forwards
         backAnimation.isRemovedOnCompletion = false
         self.layer.add(backAnimation, forKey: nil)
-        
-        self.transformScaleAnimation(fromValue: 0.2, toValue: 1, duration: 0.3, view: cell.imgView)
-
-    }
-    // 缩放 + 淡入淡出
-    func removeAnimation(_ imgView: UIImageView) {
-        self.transformScaleAnimation(fromValue: 1.0, toValue: 0.2, duration: 0.3, view: imgView)
-        self.backRemoveAnimation(duration)
-    }
-    
-    // 缩放
-    func transformScaleAnimation(fromValue: CGFloat,toValue: CGFloat,duration: CFTimeInterval,view: UIView) {
-        let scale = CABasicAnimation()
-        scale.keyPath = "transform.scale"
-        scale.fromValue = fromValue
-        scale.toValue = toValue
-        scale.duration = duration
-        scale.fillMode = CAMediaTimingFillMode.forwards
-        scale.isRemovedOnCompletion = false
-        view.layer.add(scale, forKey: nil)
     }
     
     // 背景变淡消失的动画
@@ -236,6 +251,9 @@ extension ShowBigImgBackView {
         self.layer.add(backAnimation, forKey: nil)
     }
     
+    func changeBackAlpha(alpha: CGFloat) {
+        self.backgroundColor = UIColor.black.withAlphaComponent(alpha)
+    }
 }
 // MARK: 动画代理
 extension ShowBigImgBackView: CAAnimationDelegate {

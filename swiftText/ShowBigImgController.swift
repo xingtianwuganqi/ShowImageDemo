@@ -10,7 +10,7 @@ import UIKit
 
 public class ShowBigImgController: UIViewController {
     
-    internal var showView: ShowBigImgBackView?
+    internal var showView: ShowBigImgBackView
     internal var number: Int
     public init(imgs: [UIImage],img: UIImage) {
         var number = 0
@@ -43,16 +43,16 @@ public class ShowBigImgController: UIViewController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .clear
-        self.view.addSubview(self.showView!)
+        self.view.addSubview(self.showView)
         
-        self.showView?.dismissCallBack = { [weak self] in
+        self.showView.dismissCallBack = { [weak self] in
             self?.dismiss(animated: false, completion: nil)
         }
     }
     
     public override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.showView?.transformAnimation(num: self.number)
+        self.showView.transformAnimation()
     }
     
     deinit {

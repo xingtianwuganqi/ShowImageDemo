@@ -24,6 +24,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     lazy var imgView : UIImageView = {
         let imageView = UIImageView.init()
+        imageView.contentMode = .scaleToFill
         return imageView
     }()
     
@@ -96,6 +97,7 @@ class CollectionViewCell: UICollectionViewCell {
     
     var backRemoveCallBack: (() -> Void)?
     var tapMoveCallBack:((_ view: UIImageView) -> Void)?
+    var changeAlphaCallBack: ((_ value: CGFloat) -> Void)?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -131,13 +133,11 @@ extension CollectionViewCell : UIScrollViewDelegate {
     
     // 当正在缩放的时候
     public func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        //获取到这个scrollview
+//        获取到这个scrollview
         var centerX = self.backScroll.center.x
         var centerY = self.backScroll.center.y
-        centerX = scrollView.contentSize.width > scrollView.frame.size.width ?
-            scrollView.contentSize.width/2:centerX
-        centerY = scrollView.contentSize.height > scrollView.frame.size.height ?
-            scrollView.contentSize.height/2:centerY
+        centerX = scrollView.contentSize.width > scrollView.frame.size.width ? scrollView.contentSize.width/2 : centerX
+        centerY = scrollView.contentSize.height > scrollView.frame.size.height ? scrollView.contentSize.height/2 : centerY
         self.imgView.center = CGPoint(x: centerX, y: centerY)
     }
     
@@ -146,6 +146,52 @@ extension CollectionViewCell : UIScrollViewDelegate {
     }
     
 }
+
+// MARK: 点击的方法
+extension CollectionViewCell {
+    
+    @objc func imageClick(tap:UITapGestureRecognizer) {
+        
+        var newscale : CGFloat = 0
+        
+        guard let scroll = tap.view?.superview as? UIScrollView else {
+            return
+        }
+        
+        if scroll.zoomScale == 1.0 {
+            newscale = 3
+        }else {
+            newscale = 1.0
+        }
+        
+        let zoomRect = self.zoomRectForScale(scrollview: scroll,scale: newscale, center: tap.location(in: tap.view))
+        
+        scroll.zoom(to: zoomRect, animated: true)
+    }
+    
+    @objc func viewClick(tap:UITapGestureRecognizer) {
+        if self.backScroll.zoomScale != 1 {
+            let zoomRect = self.zoomRectForScale(scrollview: self.backScroll,scale: 1, center: self.center)
+            self.backScroll.zoom(to: zoomRect, animated: true)
+        }else{
+            
+            if tap.state == .recognized {
+                self.tapMoveCallBack?(self.imgView)
+            }
+        }
+    }
+    
+    func zoomRectForScale(scrollview: UIScrollView, scale: CGFloat,center: CGPoint) -> CGRect {
+        var zoomRect: CGRect = CGRect()
+        zoomRect.size.height = scrollview.frame.size.height / scale
+        zoomRect.size.width = scrollview.frame.size.width / scale
+        zoomRect.origin.x = center.x - (zoomRect.size.width / 2.0)
+        zoomRect.origin.y = center.y - (zoomRect.size.height / 2.0)
+        return zoomRect
+    }
+
+}
+
 
 // MARK: 添加手势
 extension CollectionViewCell: UIGestureRecognizerDelegate {
@@ -184,17 +230,18 @@ extension CollectionViewCell: UIGestureRecognizerDelegate {
         if pan.state == .changed {
             imageview.center = CGPoint(x: imageview.center.x, y: imageview.center.y + translation.y)
             pan.setTranslation(.zero, in: imgSuperView)
-//            print("Change Frame: ",imageview.frame)
-            // 滑动时改变背景透明度
-            //            let alphaScale = abs(imageview.center.y - ScreenH / 2)
-            //            print("alphaScale: ",alphaScale)
-            //            self.backView.backgroundColor = UIColor.black.withAlphaComponent((ScreenH - CGFloat(alphaScale)) / ScreenH)
+            print("Change Frame: ",imageview.frame)
+            //滑动时改变背景透明度
+            let alphaScale = abs(imageview.center.y - ScreenH / 2)
+            print("alphaScale: ",alphaScale)
+//            self.backView.backgroundColor = UIColor.black.withAlphaComponent((ScreenH - CGFloat(alphaScale)) / ScreenH)
+            self.changeAlphaCallBack?(((ScreenH - CGFloat(alphaScale)) / ScreenH))
         }else if pan.state == .ended {
             
             // 如果偏移量大于某个值，直接划走消失，否则回归原位
-            if imageview.center.y > ScreenH / 2 + 50 {
+            if imageview.center.y > ScreenH / 2 + 60 {
                 self.imagePanRemoveAnimation(false, imageview: imageview)
-            }else if imageview.center.y < ScreenH / 2 - 50 {
+            }else if imageview.center.y < ScreenH / 2 - 60 {
                 self.imagePanRemoveAnimation(true, imageview: imageview)
             }else{
                 // 回复原位
@@ -257,43 +304,5 @@ extension CollectionViewCell: UIGestureRecognizerDelegate {
             self.backRemoveCallBack?()
         }
     }
-}
-// MARK: 点击的方法
-extension CollectionViewCell {
-    
-    @objc func imageClick(tap:UITapGestureRecognizer) {
-        
-        var newscale : CGFloat = 0
-        
-        guard let scroll = tap.view?.superview as? UIScrollView else {
-            return
-        }
-        
-        if scroll.zoomScale == 1.0 {
-            newscale = 3
-        }else {
-            newscale = 1.0
-        }
-        
-        let zoomRect = self.zoomRectForScale(scrollview: scroll,scale: newscale, center: tap.location(in: tap.view))
-        
-        scroll.zoom(to: zoomRect, animated: true)
-    }
-    
-    @objc func viewClick(tap:UITapGestureRecognizer) {
-        if tap.state == .recognized {
-            self.tapMoveCallBack?(self.imgView)
-        }
-    }
-    
-    func zoomRectForScale(scrollview: UIScrollView, scale: CGFloat,center: CGPoint) -> CGRect {
-        var zoomRect: CGRect = CGRect()
-        zoomRect.size.height = scrollview.frame.size.height / scale
-        zoomRect.size.width = scrollview.frame.size.width / scale
-        zoomRect.origin.x = center.x - (zoomRect.size.width / 2.0)
-        zoomRect.origin.y = center.y - (zoomRect.size.height / 2.0)
-        return zoomRect
-    }
-
 }
 
