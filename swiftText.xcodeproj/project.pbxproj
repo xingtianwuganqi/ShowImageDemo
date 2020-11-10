@@ -18,6 +18,7 @@
 		C4150650255923390027FD3F /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C415064F255923390027FD3F /* CollectionViewCell.swift */; };
 		C435FE77244DA585002718B9 /* ShowBigImgController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C435FE75244DA585002718B9 /* ShowBigImgController.swift */; };
 		C435FE7A244DA6F8002718B9 /* ShowBigImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C435FE79244DA6F8002718B9 /* ShowBigImgView.swift */; };
+		C43D4B38255A636200776E0D /* CollectionPageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D4B37255A636200776E0D /* CollectionPageFlowLayout.swift */; };
 		C44EF7E6238C03C400BD2C9C /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44EF7E4238C03C300BD2C9C /* TabbarViewController.swift */; };
 		C44EF7E7238C03C400BD2C9C /* YUNNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44EF7E5238C03C300BD2C9C /* YUNNavigationController.swift */; };
 		C44EF7EB238C0F8800BD2C9C /* commont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44EF7EA238C0F8800BD2C9C /* commont.swift */; };
@@ -46,6 +47,7 @@
 		C415064F255923390027FD3F /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		C435FE75244DA585002718B9 /* ShowBigImgController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowBigImgController.swift; sourceTree = "<group>"; };
 		C435FE79244DA6F8002718B9 /* ShowBigImgView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowBigImgView.swift; sourceTree = "<group>"; };
+		C43D4B37255A636200776E0D /* CollectionPageFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPageFlowLayout.swift; sourceTree = "<group>"; };
 		C44EF7E4238C03C300BD2C9C /* TabbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
 		C44EF7E5238C03C300BD2C9C /* YUNNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YUNNavigationController.swift; sourceTree = "<group>"; };
 		C44EF7EA238C0F8800BD2C9C /* commont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commont.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				C435FE79244DA6F8002718B9 /* ShowBigImgView.swift */,
 				C415064B255921CE0027FD3F /* ShowBigImgBackView.swift */,
 				C415064F255923390027FD3F /* CollectionViewCell.swift */,
+				C43D4B37255A636200776E0D /* CollectionPageFlowLayout.swift */,
 				C40F67C51FC71C75004A7868 /* ViewController.swift */,
 				C4A1C0AD2134EFA600714601 /* HomePageController.swift */,
 				C4A1C0AF2134EFB900714601 /* ListViewController.swift */,
@@ -262,6 +265,7 @@
 				C4A1C0B22134EFE000714601 /* UserInfoController.swift in Sources */,
 				C40F67C61FC71C75004A7868 /* ViewController.swift in Sources */,
 				C40F67CC1FC71C75004A7868 /* swiftText.xcdatamodeld in Sources */,
+				C43D4B38255A636200776E0D /* CollectionPageFlowLayout.swift in Sources */,
 				C4E053B324654A5C00DF5DC9 /* JYCPanView.m in Sources */,
 				C415064C255921CE0027FD3F /* ShowBigImgBackView.swift in Sources */,
 				C44EF7EB238C0F8800BD2C9C /* commont.swift in Sources */,

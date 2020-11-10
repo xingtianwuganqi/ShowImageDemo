@@ -26,16 +26,15 @@ public class ShowBigImgBackView: UIView {
     }()
     
     lazy var collectionView : UICollectionView = {
-        let layout = UICollectionViewFlowLayout.init()
+        let layout = CollectionPageFlowLayout.init()
         layout.sectionHeadersPinToVisibleBounds = true
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 0
+        layout.minimumLineSpacing = 10
         layout.minimumInteritemSpacing = 0
         layout.itemSize = CGSize(width: floor(ScreenW), height: ScreenH)
         layout.sectionInset = UIEdgeInsets.init(top: 0, left: 0, bottom: 0, right: 0)
         let collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
-        collectionView.isPagingEnabled = true
         collectionView.isScrollEnabled = true
         collectionView.keyboardDismissMode = .onDrag
         collectionView.alwaysBounceVertical = false // 不允许上下弹跳
