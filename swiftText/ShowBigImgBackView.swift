@@ -11,8 +11,8 @@ import UIKit
 import SDWebImage
 
 //宏
-let ScreenW = UIApplication.shared.statusBarOrientation.isLandscape ? UIScreen.main.bounds.size.height : UIScreen.main.bounds.size.width
-let ScreenH = UIApplication.shared.statusBarOrientation.isLandscape ? UIScreen.main.bounds.size.width : UIScreen.main.bounds.size.height
+let ScreenW = UIScreen.main.bounds.size.width
+let ScreenH = UIScreen.main.bounds.size.height
 
 public class ShowBigImgBackView: UIView {
     
@@ -168,7 +168,7 @@ extension ShowBigImgBackView {
     /*
      视图将要显示时获取到第一次要显示的cell上的imgView来显示动画
      */
-    func transformAnimation() {
+    public func transformAnimation() {
         // 第一次弹出时的动画
         collectionView.reloadData()
         collectionView.layoutIfNeeded()
@@ -263,4 +263,16 @@ extension ShowBigImgBackView: CAAnimationDelegate {
         }
     }
 
+}
+extension UIImage {
+    static func imageWithColor(color: UIColor) -> UIImage? {
+        let rect = CGRect(x: 0.0, y: 0.0, width: 1.0, height: 1.0)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor)
+        context?.fill(rect)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image ?? nil
+    }
 }

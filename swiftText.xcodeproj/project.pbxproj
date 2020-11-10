@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		41A5D78161D4053913B146F2 /* Pods_swiftText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 98466C1C263AA023A3F73FC2 /* Pods_swiftText.framework */; };
 		C40F67C41FC71C75004A7868 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40F67C31FC71C75004A7868 /* AppDelegate.swift */; };
-		C40F67C61FC71C75004A7868 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40F67C51FC71C75004A7868 /* ViewController.swift */; };
 		C40F67C91FC71C75004A7868 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C40F67C71FC71C75004A7868 /* Main.storyboard */; };
 		C40F67CC1FC71C75004A7868 /* swiftText.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C40F67CA1FC71C75004A7868 /* swiftText.xcdatamodeld */; };
 		C40F67CE1FC71C75004A7868 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C40F67CD1FC71C75004A7868 /* Assets.xcassets */; };
@@ -29,7 +28,6 @@
 		C4A1C0B02134EFB900714601 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A1C0AF2134EFB900714601 /* ListViewController.swift */; };
 		C4A1C0B22134EFE000714601 /* UserInfoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A1C0B12134EFE000714601 /* UserInfoController.swift */; };
 		C4A3082223A0FB6800E3A312 /* long.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C4A3082123A0FB6800E3A312 /* long.jpg */; };
-		C4E053B324654A5C00DF5DC9 /* JYCPanView.m in Sources */ = {isa = PBXBuildFile; fileRef = C4E053B224654A5C00DF5DC9 /* JYCPanView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +35,6 @@
 		98466C1C263AA023A3F73FC2 /* Pods_swiftText.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_swiftText.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C40F67C01FC71C75004A7868 /* swiftText.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = swiftText.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C40F67C31FC71C75004A7868 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C40F67C51FC71C75004A7868 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C40F67C81FC71C75004A7868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C40F67CB1FC71C75004A7868 /* swiftText.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = swiftText.xcdatamodel; sourceTree = "<group>"; };
 		C40F67CD1FC71C75004A7868 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -59,8 +56,6 @@
 		C4A1C0B12134EFE000714601 /* UserInfoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoController.swift; sourceTree = "<group>"; };
 		C4A3082123A0FB6800E3A312 /* long.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = long.jpg; sourceTree = "<group>"; };
 		C4C4B5A01FFA36AF00399DB1 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
-		C4E053B124654A5C00DF5DC9 /* JYCPanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JYCPanView.h; sourceTree = "<group>"; };
-		C4E053B224654A5C00DF5DC9 /* JYCPanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JYCPanView.m; sourceTree = "<group>"; };
 		FCF3F2CDBD897392154221E1 /* Pods-swiftText.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-swiftText.debug.xcconfig"; path = "Pods/Target Support Files/Pods-swiftText/Pods-swiftText.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,17 +118,11 @@
 				C415064B255921CE0027FD3F /* ShowBigImgBackView.swift */,
 				C415064F255923390027FD3F /* CollectionViewCell.swift */,
 				C43D4B37255A636200776E0D /* CollectionPageFlowLayout.swift */,
-				C40F67C51FC71C75004A7868 /* ViewController.swift */,
 				C4A1C0AD2134EFA600714601 /* HomePageController.swift */,
 				C4A1C0AF2134EFB900714601 /* ListViewController.swift */,
 				C4A1C0B12134EFE000714601 /* UserInfoController.swift */,
-				C4E053B124654A5C00DF5DC9 /* JYCPanView.h */,
-				C4E053B224654A5C00DF5DC9 /* JYCPanView.m */,
-				C498314A239B8AAA00BF67F9 /* 16a521d332df104d.jpg */,
-				C498314C239B8AAB00BF67F9 /* avator.png */,
-				C498314B239B8AAA00BF67F9 /* head.jpg */,
-				C4A3082123A0FB6800E3A312 /* long.jpg */,
 				C4C4B5A01FFA36AF00399DB1 /* Header.h */,
+				C43D4B3B255AA90C00776E0D /* images */,
 				C40F67C71FC71C75004A7868 /* Main.storyboard */,
 				C40F67CD1FC71C75004A7868 /* Assets.xcassets */,
 				C40F67CF1FC71C75004A7868 /* LaunchScreen.storyboard */,
@@ -141,6 +130,17 @@
 				C40F67CA1FC71C75004A7868 /* swiftText.xcdatamodeld */,
 			);
 			path = swiftText;
+			sourceTree = "<group>";
+		};
+		C43D4B3B255AA90C00776E0D /* images */ = {
+			isa = PBXGroup;
+			children = (
+				C498314A239B8AAA00BF67F9 /* 16a521d332df104d.jpg */,
+				C498314C239B8AAB00BF67F9 /* avator.png */,
+				C498314B239B8AAA00BF67F9 /* head.jpg */,
+				C4A3082123A0FB6800E3A312 /* long.jpg */,
+			);
+			path = images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,10 +263,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C4A1C0B22134EFE000714601 /* UserInfoController.swift in Sources */,
-				C40F67C61FC71C75004A7868 /* ViewController.swift in Sources */,
 				C40F67CC1FC71C75004A7868 /* swiftText.xcdatamodeld in Sources */,
 				C43D4B38255A636200776E0D /* CollectionPageFlowLayout.swift in Sources */,
-				C4E053B324654A5C00DF5DC9 /* JYCPanView.m in Sources */,
 				C415064C255921CE0027FD3F /* ShowBigImgBackView.swift in Sources */,
 				C44EF7EB238C0F8800BD2C9C /* commont.swift in Sources */,
 				C44EF7E7238C03C400BD2C9C /* YUNNavigationController.swift in Sources */,
