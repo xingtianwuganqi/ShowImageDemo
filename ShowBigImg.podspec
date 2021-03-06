@@ -9,7 +9,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "ShowBigImg"
-  spec.version      = "0.0.7"
+  spec.version      = "0.0.8"
   spec.summary      = "仿微信朋友圈查看图片"
   
   spec.description  = <<-DESC

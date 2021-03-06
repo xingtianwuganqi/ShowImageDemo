@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import SDWebImage
 class CollectionViewCell: UICollectionViewCell {
     
     lazy var backScroll : UIScrollView = {
@@ -43,7 +43,7 @@ class CollectionViewCell: UICollectionViewCell {
             guard let img_url = imgUrl else {
                 return
             }
-            imgView.sd_setImage(with: URL(string: img_url), placeholderImage: UIImage.imageWithColor(color: UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)), options: [SDWebImageOptions.allowInvalidSSLCertificates]) { [weak self](img, error, _, url) in
+            imgView.sd_setImage(with: URL(string: img_url), placeholderImage: UIImage.imageWithColor(color: UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)), options: [.allowInvalidSSLCertificates]) { [weak self](img, error, _, url) in
                 guard let `self` = self else { return }
                 guard img != nil else {
                     return
