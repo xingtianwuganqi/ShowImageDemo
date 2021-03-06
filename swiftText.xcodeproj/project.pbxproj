@@ -16,7 +16,6 @@
 		C415064C255921CE0027FD3F /* ShowBigImgBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C415064B255921CE0027FD3F /* ShowBigImgBackView.swift */; };
 		C4150650255923390027FD3F /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C415064F255923390027FD3F /* CollectionViewCell.swift */; };
 		C435FE77244DA585002718B9 /* ShowBigImgController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C435FE75244DA585002718B9 /* ShowBigImgController.swift */; };
-		C435FE7A244DA6F8002718B9 /* ShowBigImgView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C435FE79244DA6F8002718B9 /* ShowBigImgView.swift */; };
 		C43D4B38255A636200776E0D /* CollectionPageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D4B37255A636200776E0D /* CollectionPageFlowLayout.swift */; };
 		C44EF7E6238C03C400BD2C9C /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44EF7E4238C03C300BD2C9C /* TabbarViewController.swift */; };
 		C44EF7E7238C03C400BD2C9C /* YUNNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44EF7E5238C03C300BD2C9C /* YUNNavigationController.swift */; };
@@ -43,7 +42,6 @@
 		C415064B255921CE0027FD3F /* ShowBigImgBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBigImgBackView.swift; sourceTree = "<group>"; };
 		C415064F255923390027FD3F /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		C435FE75244DA585002718B9 /* ShowBigImgController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowBigImgController.swift; sourceTree = "<group>"; };
-		C435FE79244DA6F8002718B9 /* ShowBigImgView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowBigImgView.swift; sourceTree = "<group>"; };
 		C43D4B37255A636200776E0D /* CollectionPageFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPageFlowLayout.swift; sourceTree = "<group>"; };
 		C44EF7E4238C03C300BD2C9C /* TabbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
 		C44EF7E5238C03C300BD2C9C /* YUNNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YUNNavigationController.swift; sourceTree = "<group>"; };
@@ -114,7 +112,6 @@
 				C44EF7E4238C03C300BD2C9C /* TabbarViewController.swift */,
 				C44EF7E5238C03C300BD2C9C /* YUNNavigationController.swift */,
 				C435FE75244DA585002718B9 /* ShowBigImgController.swift */,
-				C435FE79244DA6F8002718B9 /* ShowBigImgView.swift */,
 				C415064B255921CE0027FD3F /* ShowBigImgBackView.swift */,
 				C415064F255923390027FD3F /* CollectionViewCell.swift */,
 				C43D4B37255A636200776E0D /* CollectionPageFlowLayout.swift */,
@@ -273,7 +270,6 @@
 				C4A1C0AE2134EFA600714601 /* HomePageController.swift in Sources */,
 				C4150650255923390027FD3F /* CollectionViewCell.swift in Sources */,
 				C40F67C41FC71C75004A7868 /* AppDelegate.swift in Sources */,
-				C435FE7A244DA6F8002718B9 /* ShowBigImgView.swift in Sources */,
 				C44EF7E6238C03C400BD2C9C /* TabbarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

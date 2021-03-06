@@ -46,18 +46,19 @@ public class ShowBigImgBackView: UIView {
     
     lazy var pageControl : UIPageControl = {
         let pageControl = UIPageControl.init()
+        pageControl.isUserInteractionEnabled = false
         return pageControl
     }()
     
     
-    lazy var loading : UILabel = {
-        let label = UILabel()
-        label.text = "图片加载中"
-        label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.isHidden = false
-        return label
-    }()
+//    lazy var loading : UILabel = {
+//        let label = UILabel()
+//        label.text = "图片加载中"
+//        label.textColor = UIColor.white
+//        label.font = UIFont.systemFont(ofSize: 14)
+//        label.isHidden = false
+//        return label
+//    }()
     
     var dismissCallBack: (() -> Void)?
     
@@ -171,20 +172,22 @@ extension ShowBigImgBackView {
     public func transformAnimation() {
         // 第一次弹出时的动画
         collectionView.reloadData()
-        collectionView.layoutIfNeeded()
+        collectionView.setNeedsLayout()
+        self.collectionView.layoutIfNeeded()
+
         guard let indexPath = collectionView.indexPathForItem(at: collectionView.contentOffset) else {
             return
         }
         guard let cell = collectionView.cellForItem(at: indexPath) as? CollectionViewCell else {
             return
         }
-        
         self.showAnimation()
-        
         self.transformScaleAnimation(fromValue: 0.3, toValue: 1, duration: 0.3, view: cell.imgView)
+
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             // 赋值方法中imageview重新布局
             self.collectionView.reloadData()
+
         }
     }
     

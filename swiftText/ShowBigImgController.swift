@@ -56,6 +56,6 @@ public class ShowBigImgController: UIViewController {
     }
     
     deinit {
-        print("ShowController Deinit")
+//        print("ShowController Deinit")
     }
 }

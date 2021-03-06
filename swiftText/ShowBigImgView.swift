@@ -36,13 +36,19 @@ public class ShowBigImgView: UIView {
     }()
     
     
-    lazy var loading : UILabel = {
-        let label = UILabel()
-        label.text = "图片加载中"
-        label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.isHidden = false
-        return label
+//    lazy var loading : UILabel = {
+//        let label = UILabel()
+//        label.text = "图片加载中"
+//        label.textColor = UIColor.white
+//        label.font = UIFont.systemFont(ofSize: 14)
+//        label.isHidden = false
+//        return label
+//    }()
+    
+    lazy var activity: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView.init(style: .white)
+        activity.center = CGPoint(x: ScreenW / 2, y: ScreenH / 2)
+        return activity
     }()
     
     var dismissCallBack: (() -> Void)?
@@ -81,7 +87,8 @@ public class ShowBigImgView: UIView {
             
             imageview.sd_setImage(with: URL(string: urlArr[i]), placeholderImage: UIImage.imageWithColor(color: UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)), options: []) { (img, error, _, url) in
                 guard img != nil else {
-                    self.loading.isHidden = true
+                    self.activity.isHidden = true
+                    self.activity.stopAnimating()
                     return
                 }
                 guard let width = img?.size.width else {
@@ -91,7 +98,9 @@ public class ShowBigImgView: UIView {
                     return
                 }
                 
-                self.loading.isHidden = true
+                self.activity.isHidden = true
+                self.activity.stopAnimating()
+
                 let w = self.ScreenW
                 let h = self.ScreenW / (width / height)
                 
@@ -111,7 +120,8 @@ public class ShowBigImgView: UIView {
             
             self.addPanGesture(imageview)
         }
-        self.addSubview(loading)
+        self.addSubview(activity)
+        self.activity.startAnimating()
         //        self.addSubview(downloadBtn)
         self.addSubview(backBtn)
         
@@ -178,8 +188,8 @@ public class ShowBigImgView: UIView {
             
             self.addPanGesture(imageview)
         }
-        self.addSubview(loading)
-        loading.isHidden = true
+        self.addSubview(activity)
+        activity.isHidden = true
         //        self.addSubview(downloadBtn)
         
         self.addSubview(backBtn)
@@ -209,9 +219,9 @@ public class ShowBigImgView: UIView {
         backBtn.widthAnchor.constraint(equalToConstant: 40).isActive = true
         backBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
-        loading.translatesAutoresizingMaskIntoConstraints = false
-        loading.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        loading.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        activity.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        activity.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
     }
     
     private func setPageControl(_ total: Int,current: Int) {

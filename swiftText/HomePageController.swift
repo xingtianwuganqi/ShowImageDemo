@@ -16,7 +16,7 @@ class HomePageController: UIViewController {
                     "http://img.sccnn.com/bimg/337/23926.jpg",
                     "http://pic37.huitu.com/res/20150926/709_20150926211750111200_1.jpg",
                     "http://img.pconline.com.cn/images/photoblog/2/5/2/6/2526376/20069/18/1158593819487.jpg",
-                    "http://pic38.nipic.com/20140213/12403214_222400981002_2.jpg"]
+                    "http://pic38.nipic.com/20140213/12403214_222400981002_2.jpg","12403214_222400981002_2"]
     
     lazy var tableview : UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)

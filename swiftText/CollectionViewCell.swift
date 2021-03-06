@@ -30,9 +30,10 @@ class CollectionViewCell: UICollectionViewCell {
     
     lazy var loading : UILabel = {
         let label = UILabel()
-        label.text = "图片加载中"
+        label.text = "图片加载中..."
         label.textColor = UIColor.white
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 13)
+        label.textAlignment = .center
         label.isHidden = false
         return label
     }()
@@ -42,10 +43,9 @@ class CollectionViewCell: UICollectionViewCell {
             guard let img_url = imgUrl else {
                 return
             }
-            imgView.sd_setImage(with: URL(string: img_url), placeholderImage: UIImage.imageWithColor(color: UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)), options: []) { [weak self](img, error, _, url) in
+            imgView.sd_setImage(with: URL(string: img_url), placeholderImage: UIImage.imageWithColor(color: UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)), options: [SDWebImageOptions.allowInvalidSSLCertificates]) { [weak self](img, error, _, url) in
                 guard let `self` = self else { return }
                 guard img != nil else {
-                    self.loading.isHidden = true
                     return
                 }
                             
@@ -55,7 +55,6 @@ class CollectionViewCell: UICollectionViewCell {
                 guard let height = img?.size.height else {
                     return
                 }
-                
                 self.loading.isHidden = true
                 let w = ScreenW
                 let h = ScreenW / (width / height)
@@ -78,6 +77,7 @@ class CollectionViewCell: UICollectionViewCell {
             guard let imageV = image else {
                 return
             }
+            self.loading.isHidden = true
             imgView.image = imageV
             
             let w = ScreenW
@@ -105,10 +105,11 @@ class CollectionViewCell: UICollectionViewCell {
         self.contentView.backgroundColor = .clear
         self.contentView.addSubview(self.backScroll)
         self.backScroll.addSubview(self.imgView)
-        self.contentView.addSubview(self.loading)
         self.addTapGesture(imageview: self.imgView, scroll: self.backScroll)
         self.addPanGesture(imgView)
         
+        self.contentView.addSubview(self.loading)
+        loading.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
     }
     
     required init?(coder: NSCoder) {
@@ -230,10 +231,8 @@ extension CollectionViewCell: UIGestureRecognizerDelegate {
         if pan.state == .changed {
             imageview.center = CGPoint(x: imageview.center.x, y: imageview.center.y + translation.y)
             pan.setTranslation(.zero, in: imgSuperView)
-            print("Change Frame: ",imageview.frame)
             //滑动时改变背景透明度
             let alphaScale = abs(imageview.center.y - ScreenH / 2)
-            print("alphaScale: ",alphaScale)
 //            self.backView.backgroundColor = UIColor.black.withAlphaComponent((ScreenH - CGFloat(alphaScale)) / ScreenH)
             self.changeAlphaCallBack?(((ScreenH - CGFloat(alphaScale)) / ScreenH))
         }else if pan.state == .ended {
