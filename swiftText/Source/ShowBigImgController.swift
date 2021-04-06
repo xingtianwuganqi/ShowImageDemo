@@ -14,6 +14,7 @@ public class ShowBigImgController: UIViewController {
     
     private let SystemNaviBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height + 44
     
+    /// 默认不显示
     public var showSaveBtn: Bool = false {
         didSet {
             if showSaveBtn {
@@ -86,6 +87,9 @@ public class ShowBigImgController: UIViewController {
     
     // 保存图片
     @objc func saveBtnClick() {
+        DispatchQueue.main.async {
+            MBProgressHUD.xy_show(activity: "保存中...")
+        }
         let index = Int(self.showView.collectionView.contentOffset.x / ScreenW)
         
         if self.showView.urlArr.count > 0 {
@@ -114,6 +118,7 @@ public class ShowBigImgController: UIViewController {
         PHPhotoLibrary.requestAuthorization { (status) in
 
             if status == PHAuthorizationStatus.authorized || status == PHAuthorizationStatus.notDetermined {
+                
                 PHPhotoLibrary.shared().performChanges {
                     if let data = data {
                         let req = PHAssetCreationRequest.forAsset()
@@ -125,11 +130,18 @@ public class ShowBigImgController: UIViewController {
                     
                 } completionHandler: { (finish, error) in
                     DispatchQueue.main.async {
-                        self.showAlertInfo(success: finish)
+                        if finish {
+                            MBProgressHUD.xy_hide()
+                            MBProgressHUD.xy_show("保存成功")
+                        }else{
+                            MBProgressHUD.xy_hide()
+                            MBProgressHUD.xy_show("保存失败")
+                        }
                     }
                 }
 
             }else{
+                MBProgressHUD.xy_hide()
                 //去设置
                 self.openSystemSettingPhotoLibrary()
 
@@ -165,37 +177,4 @@ public class ShowBigImgController: UIViewController {
             self.present(alert, animated:true, completion:nil)
 
         }
-    
-    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
-        let hud = MBProgressHUD.showAdded(to: self.showView, animated: true)
-        hud.mode = .text
-        hud.bezelView.style = .solidColor
-        hud.bezelView.color = UIColor.black
-        hud.label.font = UIFont.systemFont(ofSize: 14)
-        hud.label.textColor = .white
-        if error != nil {
-            hud.label.text = "保存失败"
-        } else {
-            hud.label.text = "保存成功"
-        }
-        hud.show(animated: true)
-        hud.hide(animated: true, afterDelay: 1.5)
-
-    }
-    
-    func showAlertInfo(success: Bool) {
-        let hud = MBProgressHUD.showAdded(to: self.showView, animated: true)
-        hud.mode = .text
-        hud.bezelView.style = .solidColor
-        hud.bezelView.color = UIColor.black
-        hud.label.font = UIFont.systemFont(ofSize: 14)
-        hud.label.textColor = .white
-        if success {
-            hud.label.text = "保存成功"
-        } else {
-            hud.label.text = "保存失败"
-        }
-        hud.show(animated: true)
-        hud.hide(animated: true, afterDelay: 1.5)
-    }
 }

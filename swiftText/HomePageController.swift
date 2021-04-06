@@ -16,12 +16,7 @@ class HomePageController: UIViewController {
                     "http://img.sccnn.com/bimg/337/23926.jpg",
                     "http://pic37.huitu.com/res/20150926/709_20150926211750111200_1.jpg",
                     "http://img.pconline.com.cn/images/photoblog/2/5/2/6/2526376/20069/18/1158593819487.jpg",
-<<<<<<< Updated upstream
-                    "http://pic38.nipic.com/20140213/12403214_222400981002_2.jpg","12403214_222400981002_2"]
-    
-=======
                     "http://pic38.nipic.com/20140213/12403214_222400981002_2.jpg"]
->>>>>>> Stashed changes
     lazy var tableview : UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.showsVerticalScrollIndicator = false
@@ -56,7 +51,7 @@ class HomePageController: UIViewController {
     func showImg (imgs: [String],url: String) {
         let showController = ShowBigImgController(urls: imgs, url: url)
         showController.modalPresentationStyle = .overFullScreen
-//        showController.showSaveBtn = true
+        showController.showSaveBtn = true
         self.present(showController, animated: false, completion: nil)
     }
 }

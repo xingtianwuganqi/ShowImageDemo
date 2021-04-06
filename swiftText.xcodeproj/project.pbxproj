@@ -13,13 +13,14 @@
 		C40F67CC1FC71C75004A7868 /* swiftText.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C40F67CA1FC71C75004A7868 /* swiftText.xcdatamodeld */; };
 		C40F67CE1FC71C75004A7868 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C40F67CD1FC71C75004A7868 /* Assets.xcassets */; };
 		C40F67D11FC71C75004A7868 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C40F67CF1FC71C75004A7868 /* LaunchScreen.storyboard */; };
-		C415064C255921CE0027FD3F /* ShowBigImgBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C415064B255921CE0027FD3F /* ShowBigImgBackView.swift */; };
-		C4150650255923390027FD3F /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C415064F255923390027FD3F /* CollectionViewCell.swift */; };
-		C435FE77244DA585002718B9 /* ShowBigImgController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C435FE75244DA585002718B9 /* ShowBigImgController.swift */; };
-		C43D4B38255A636200776E0D /* CollectionPageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C43D4B37255A636200776E0D /* CollectionPageFlowLayout.swift */; };
 		C44EF7E6238C03C400BD2C9C /* TabbarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44EF7E4238C03C300BD2C9C /* TabbarViewController.swift */; };
 		C44EF7E7238C03C400BD2C9C /* YUNNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44EF7E5238C03C300BD2C9C /* YUNNavigationController.swift */; };
 		C44EF7EB238C0F8800BD2C9C /* commont.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44EF7EA238C0F8800BD2C9C /* commont.swift */; };
+		C48E2EA1261C65E3006E1F04 /* ShowBigImgBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48E2E9D261C65E3006E1F04 /* ShowBigImgBackView.swift */; };
+		C48E2EA2261C65E3006E1F04 /* ShowBigImgController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48E2E9E261C65E3006E1F04 /* ShowBigImgController.swift */; };
+		C48E2EA3261C65E3006E1F04 /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48E2E9F261C65E3006E1F04 /* CollectionViewCell.swift */; };
+		C48E2EA4261C65E3006E1F04 /* CollectionPageFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48E2EA0261C65E3006E1F04 /* CollectionPageFlowLayout.swift */; };
+		C48E2EB0261C6869006E1F04 /* MBP_Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48E2EAF261C6869006E1F04 /* MBP_Extension.swift */; };
 		C498314D239B8AAB00BF67F9 /* 16a521d332df104d.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C498314A239B8AAA00BF67F9 /* 16a521d332df104d.jpg */; };
 		C498314E239B8AAB00BF67F9 /* head.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C498314B239B8AAA00BF67F9 /* head.jpg */; };
 		C498314F239B8AAB00BF67F9 /* avator.png in Resources */ = {isa = PBXBuildFile; fileRef = C498314C239B8AAB00BF67F9 /* avator.png */; };
@@ -39,13 +40,14 @@
 		C40F67CD1FC71C75004A7868 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C40F67D01FC71C75004A7868 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C40F67D21FC71C75004A7868 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C415064B255921CE0027FD3F /* ShowBigImgBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowBigImgBackView.swift; sourceTree = "<group>"; };
-		C415064F255923390027FD3F /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
-		C435FE75244DA585002718B9 /* ShowBigImgController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowBigImgController.swift; sourceTree = "<group>"; };
-		C43D4B37255A636200776E0D /* CollectionPageFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionPageFlowLayout.swift; sourceTree = "<group>"; };
 		C44EF7E4238C03C300BD2C9C /* TabbarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarViewController.swift; sourceTree = "<group>"; };
 		C44EF7E5238C03C300BD2C9C /* YUNNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YUNNavigationController.swift; sourceTree = "<group>"; };
 		C44EF7EA238C0F8800BD2C9C /* commont.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = commont.swift; sourceTree = "<group>"; };
+		C48E2E9D261C65E3006E1F04 /* ShowBigImgBackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowBigImgBackView.swift; sourceTree = "<group>"; };
+		C48E2E9E261C65E3006E1F04 /* ShowBigImgController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowBigImgController.swift; sourceTree = "<group>"; };
+		C48E2E9F261C65E3006E1F04 /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		C48E2EA0261C65E3006E1F04 /* CollectionPageFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionPageFlowLayout.swift; sourceTree = "<group>"; };
+		C48E2EAF261C6869006E1F04 /* MBP_Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MBP_Extension.swift; sourceTree = "<group>"; };
 		C498314A239B8AAA00BF67F9 /* 16a521d332df104d.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 16a521d332df104d.jpg; sourceTree = "<group>"; };
 		C498314B239B8AAA00BF67F9 /* head.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = head.jpg; sourceTree = "<group>"; };
 		C498314C239B8AAB00BF67F9 /* avator.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avator.png; sourceTree = "<group>"; };
@@ -112,13 +114,6 @@
 				C44EF7EA238C0F8800BD2C9C /* commont.swift */,
 				C44EF7E4238C03C300BD2C9C /* TabbarViewController.swift */,
 				C44EF7E5238C03C300BD2C9C /* YUNNavigationController.swift */,
-<<<<<<< Updated upstream
-				C435FE75244DA585002718B9 /* ShowBigImgController.swift */,
-				C415064B255921CE0027FD3F /* ShowBigImgBackView.swift */,
-				C415064F255923390027FD3F /* CollectionViewCell.swift */,
-				C43D4B37255A636200776E0D /* CollectionPageFlowLayout.swift */,
-=======
->>>>>>> Stashed changes
 				C4A1C0AD2134EFA600714601 /* HomePageController.swift */,
 				C4A1C0AF2134EFB900714601 /* ListViewController.swift */,
 				C4A1C0B12134EFE000714601 /* UserInfoController.swift */,
@@ -147,10 +142,11 @@
 		C48E2E86261C0A20006E1F04 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				C435FE75244DA585002718B9 /* ShowBigImgController.swift */,
-				C415064B255921CE0027FD3F /* ShowBigImgBackView.swift */,
-				C415064F255923390027FD3F /* CollectionViewCell.swift */,
-				C43D4B37255A636200776E0D /* CollectionPageFlowLayout.swift */,
+				C48E2EA0261C65E3006E1F04 /* CollectionPageFlowLayout.swift */,
+				C48E2E9F261C65E3006E1F04 /* CollectionViewCell.swift */,
+				C48E2E9D261C65E3006E1F04 /* ShowBigImgBackView.swift */,
+				C48E2E9E261C65E3006E1F04 /* ShowBigImgController.swift */,
+				C48E2EAF261C6869006E1F04 /* MBP_Extension.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -184,7 +180,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0910;
-				LastUpgradeCheck = 0910;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = "景军";
 				TargetAttributes = {
 					C40F67BF1FC71C75004A7868 = {
@@ -280,18 +276,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C48E2EA4261C65E3006E1F04 /* CollectionPageFlowLayout.swift in Sources */,
+				C48E2EA1261C65E3006E1F04 /* ShowBigImgBackView.swift in Sources */,
 				C4A1C0B22134EFE000714601 /* UserInfoController.swift in Sources */,
 				C40F67CC1FC71C75004A7868 /* swiftText.xcdatamodeld in Sources */,
-				C43D4B38255A636200776E0D /* CollectionPageFlowLayout.swift in Sources */,
-				C415064C255921CE0027FD3F /* ShowBigImgBackView.swift in Sources */,
 				C44EF7EB238C0F8800BD2C9C /* commont.swift in Sources */,
+				C48E2EB0261C6869006E1F04 /* MBP_Extension.swift in Sources */,
 				C44EF7E7238C03C400BD2C9C /* YUNNavigationController.swift in Sources */,
+				C48E2EA2261C65E3006E1F04 /* ShowBigImgController.swift in Sources */,
 				C4A1C0B02134EFB900714601 /* ListViewController.swift in Sources */,
-				C435FE77244DA585002718B9 /* ShowBigImgController.swift in Sources */,
 				C4A1C0AE2134EFA600714601 /* HomePageController.swift in Sources */,
-				C4150650255923390027FD3F /* CollectionViewCell.swift in Sources */,
 				C40F67C41FC71C75004A7868 /* AppDelegate.swift in Sources */,
 				C44EF7E6238C03C400BD2C9C /* TabbarViewController.swift in Sources */,
+				C48E2EA3261C65E3006E1F04 /* CollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +328,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -338,8 +336,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -365,7 +365,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -388,6 +388,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -395,8 +396,10 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -416,7 +419,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -433,7 +436,7 @@
 				DEVELOPMENT_TEAM = SX73SRB2SL;
 				GCC_PREFIX_HEADER = swiftText/Header.h;
 				INFOPLIST_FILE = swiftText/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.720yun.AMapDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -453,7 +456,7 @@
 				DEVELOPMENT_TEAM = SX73SRB2SL;
 				GCC_PREFIX_HEADER = swiftText/Header.h;
 				INFOPLIST_FILE = swiftText/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.720yun.AMapDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

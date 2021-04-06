@@ -49,20 +49,7 @@ public class ShowBigImgBackView: UIView {
         pageControl.isUserInteractionEnabled = false
         return pageControl
     }()
-    
-<<<<<<< Updated upstream:swiftText/ShowBigImgBackView.swift
-    
-//    lazy var loading : UILabel = {
-//        let label = UILabel()
-//        label.text = "图片加载中"
-//        label.textColor = UIColor.white
-//        label.font = UIFont.systemFont(ofSize: 14)
-//        label.isHidden = false
-//        return label
-//    }()
-    
-=======
->>>>>>> Stashed changes:swiftText/Source/ShowBigImgBackView.swift
+
     var dismissCallBack: (() -> Void)?
     
     var urlArr : [String] = []
@@ -185,13 +172,7 @@ extension ShowBigImgBackView {
             return
         }
         self.showAnimation()
-<<<<<<< Updated upstream:swiftText/ShowBigImgBackView.swift
-        self.transformScaleAnimation(fromValue: 0.3, toValue: 1, duration: 0.3, view: cell.imgView)
-
-=======
-        
         self.transformScaleAnimation(fromValue: 0.3, toValue: 1, duration: 0.3, view: cell.reloadImg)
->>>>>>> Stashed changes:swiftText/Source/ShowBigImgBackView.swift
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             // 赋值方法中imageview重新布局
             self.collectionView.reloadData()

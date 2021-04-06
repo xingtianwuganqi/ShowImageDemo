@@ -9,7 +9,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "ShowBigImg"
-  spec.version      = "0.0.8"
+  spec.version      = "0.0.9"
   spec.summary      = "仿微信朋友圈查看图片"
   
   spec.description  = <<-DESC
@@ -27,9 +27,11 @@ Pod::Spec.new do |spec|
 
   spec.source       = { :git => "https://github.com/xingtianwuganqi/ShowImageDemo.git", :tag => "#{spec.version}" }
 
-  spec.source_files  = "swiftText/ShowBigImgController.swift","swiftText/ShowBigImgBackView.swift","swiftText/CollectionViewCell.swift","swiftText/CollectionPageFlowLayout.swift"
+  spec.source_files  = "swiftText/Source/*.swift"
 
   spec.frameworks = "Foundation","UIKit"
   spec.ios.dependency 'SDWebImage'
+  spec.ios.dependency 'SDWebImageFLPlugin'
+  spec.ios.dependency 'MBProgressHUD'
 
 end
