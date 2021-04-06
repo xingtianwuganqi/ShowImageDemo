@@ -7,7 +7,11 @@
 //
 
 import UIKit
+<<<<<<< Updated upstream:swiftText/CollectionViewCell.swift
 import SDWebImage
+=======
+import SDWebImageFLPlugin
+>>>>>>> Stashed changes:swiftText/Source/CollectionViewCell.swift
 class CollectionViewCell: UICollectionViewCell {
     
     lazy var backScroll : UIScrollView = {
@@ -22,12 +26,12 @@ class CollectionViewCell: UICollectionViewCell {
     }()
     
     
-    lazy var imgView : UIImageView = {
-        let imageView = UIImageView.init()
-        imageView.contentMode = .scaleToFill
+    lazy var reloadImg : reloadImgView = {
+        let imageView = reloadImgView.init(frame: .zero)
         return imageView
     }()
     
+<<<<<<< Updated upstream:swiftText/CollectionViewCell.swift
     lazy var loading : UILabel = {
         let label = UILabel()
         label.text = "图片加载中..."
@@ -38,14 +42,24 @@ class CollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+=======
+>>>>>>> Stashed changes:swiftText/Source/CollectionViewCell.swift
     var imgUrl: String? {
         didSet {
             guard let img_url = imgUrl else {
                 return
             }
+<<<<<<< Updated upstream:swiftText/CollectionViewCell.swift
             imgView.sd_setImage(with: URL(string: img_url), placeholderImage: UIImage.imageWithColor(color: UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)), options: [.allowInvalidSSLCertificates]) { [weak self](img, error, _, url) in
                 guard let `self` = self else { return }
                 guard img != nil else {
+=======
+            reloadImg.loading.startAnimating()
+            reloadImg.imgView.sd_setImage(with: URL(string: img_url), placeholderImage: UIImage.imageWithColor(color: UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)), options: []) { [weak self](img, error, _, url) in
+                guard let `self` = self else { return }
+                guard img != nil else {
+                    self.reloadImg.loading.stopAnimating()
+>>>>>>> Stashed changes:swiftText/Source/CollectionViewCell.swift
                     return
                 }
                             
@@ -55,19 +69,32 @@ class CollectionViewCell: UICollectionViewCell {
                 guard let height = img?.size.height else {
                     return
                 }
+<<<<<<< Updated upstream:swiftText/CollectionViewCell.swift
                 self.loading.isHidden = true
+=======
+                
+                self.reloadImg.loading.stopAnimating()
+>>>>>>> Stashed changes:swiftText/Source/CollectionViewCell.swift
                 let w = ScreenW
                 let h = ScreenW / (width / height)
                 
                 if h > ScreenH {
                     let y = (h - ScreenH) / 2
-                    self.backScroll.contentSize = CGSize(width: ScreenW, height: h)
-                    self.backScroll.contentOffset = CGPoint(x: 0, y: y)
-                    self.imgView.frame = CGRect(x: 0, y: 0, width: w, height: h)
+                    DispatchQueue.main.async {
+                        self.backScroll.contentSize = CGSize(width: ScreenW, height: h)
+                        self.backScroll.contentOffset = CGPoint(x: 0, y: y)
+                        self.reloadImg.frame = CGRect(x: 0, y: 0, width: w, height: h)
+                    }
+                    
                 }else{
                     let y = (ScreenH - h) / 2
-                    self.imgView.frame = CGRect(x: 0, y: y, width: w, height: h)
+                    DispatchQueue.main.async {
+                        self.reloadImg.frame = CGRect(x: 0, y: y, width: w, height: h)
+                    }
+                    
                 }
+                
+                print(self.reloadImg.frame)
             }
         }
     }
@@ -77,8 +104,12 @@ class CollectionViewCell: UICollectionViewCell {
             guard let imageV = image else {
                 return
             }
+<<<<<<< Updated upstream:swiftText/CollectionViewCell.swift
             self.loading.isHidden = true
             imgView.image = imageV
+=======
+            reloadImg.imgView.image = imageV
+>>>>>>> Stashed changes:swiftText/Source/CollectionViewCell.swift
             
             let w = ScreenW
             let h = ScreenW / (imageV.size.width / imageV.size.height)
@@ -87,16 +118,16 @@ class CollectionViewCell: UICollectionViewCell {
                 let y = (h - ScreenH) / 2
                 self.backScroll.contentSize = CGSize(width: ScreenW, height: h)
                 self.backScroll.contentOffset = CGPoint(x: 0, y: y)
-                imgView.frame = CGRect(x: 0, y: 0, width: w, height: h)
+                reloadImg.frame = CGRect(x: 0, y: 0, width: w, height: h)
             }else{
                 let y = (ScreenH - h) / 2
-                imgView.frame = CGRect(x: 0, y: y, width: w, height: h)
+                reloadImg.frame = CGRect(x: 0, y: y, width: w, height: h)
             }
         }
     }
     
     var backRemoveCallBack: (() -> Void)?
-    var tapMoveCallBack:((_ view: UIImageView) -> Void)?
+    var tapMoveCallBack:((_ view: UIView) -> Void)?
     var changeAlphaCallBack: ((_ value: CGFloat) -> Void)?
     
     override init(frame: CGRect) {
@@ -104,9 +135,15 @@ class CollectionViewCell: UICollectionViewCell {
         self.backgroundColor = .clear
         self.contentView.backgroundColor = .clear
         self.contentView.addSubview(self.backScroll)
+<<<<<<< Updated upstream:swiftText/CollectionViewCell.swift
         self.backScroll.addSubview(self.imgView)
         self.addTapGesture(imageview: self.imgView, scroll: self.backScroll)
         self.addPanGesture(imgView)
+=======
+        self.backScroll.addSubview(self.reloadImg)
+        self.addTapGesture(imageview: self.reloadImg, scroll: self.backScroll)
+        self.addPanGesture(reloadImg)
+>>>>>>> Stashed changes:swiftText/Source/CollectionViewCell.swift
         
         self.contentView.addSubview(self.loading)
         loading.frame = CGRect(x: 0, y: 0, width: ScreenW, height: ScreenH)
@@ -120,7 +157,7 @@ class CollectionViewCell: UICollectionViewCell {
 extension CollectionViewCell : UIScrollViewDelegate {
     // 当scrollview 尝试进行缩放的时候
     public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return self.imgView
+        return self.reloadImg
     }
     
     // 当缩放完毕的时候调用
@@ -139,7 +176,7 @@ extension CollectionViewCell : UIScrollViewDelegate {
         var centerY = self.backScroll.center.y
         centerX = scrollView.contentSize.width > scrollView.frame.size.width ? scrollView.contentSize.width/2 : centerX
         centerY = scrollView.contentSize.height > scrollView.frame.size.height ? scrollView.contentSize.height/2 : centerY
-        self.imgView.center = CGPoint(x: centerX, y: centerY)
+        self.reloadImg.center = CGPoint(x: centerX, y: centerY)
     }
     
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -177,7 +214,7 @@ extension CollectionViewCell {
         }else{
             
             if tap.state == .recognized {
-                self.tapMoveCallBack?(self.imgView)
+                self.tapMoveCallBack?(self.reloadImg)
             }
         }
     }
@@ -197,7 +234,7 @@ extension CollectionViewCell {
 // MARK: 添加手势
 extension CollectionViewCell: UIGestureRecognizerDelegate {
     // 点击手势
-    func addTapGesture(imageview: UIImageView,scroll: UIScrollView) {
+    func addTapGesture(imageview: UIView,scroll: UIScrollView) {
         imageview.isUserInteractionEnabled = true
         scroll.isUserInteractionEnabled = true
         let doubleTap = UITapGestureRecognizer(target: self, action: #selector(imageClick(tap:)))
@@ -305,3 +342,43 @@ extension CollectionViewCell: UIGestureRecognizerDelegate {
     }
 }
 
+class reloadImgView: UIView {
+    
+    lazy var imgView : FLAnimatedImageView = {
+        let imageView = FLAnimatedImageView.init()
+        imageView.contentMode = .scaleToFill
+        return imageView
+    }()
+    
+    
+    lazy var loading: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView.init()
+        loading.backgroundColor = .clear
+        loading.color = .white
+        loading.hidesWhenStopped = true
+        return loading
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .clear
+        self.addSubview(imgView)
+        self.addSubview(loading)
+        self.imgView.translatesAutoresizingMaskIntoConstraints = false
+        self.imgView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        self.imgView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        self.imgView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        self.imgView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        
+        self.loading.translatesAutoresizingMaskIntoConstraints = false
+        self.loading.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
+        self.loading.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
+        self.loading.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        self.loading.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+}

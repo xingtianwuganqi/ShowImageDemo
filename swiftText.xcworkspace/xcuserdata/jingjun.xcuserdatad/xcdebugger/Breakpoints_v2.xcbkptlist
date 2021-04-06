@@ -24,6 +24,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+<<<<<<< Updated upstream
             uuid = "BCC69DC7-D175-4079-A0A6-DE31978897BD"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -35,11 +36,25 @@
             endingLineNumber = "151"
             landmarkName = "showImages(Images:number:)"
             landmarkType = "7">
+=======
+            uuid = "5581BFCE-4AEE-4E5D-965C-B832A482726B"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "swiftText/Source/ShowBigImgController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
+            landmarkName = "showSaveBtn"
+            landmarkType = "24">
+>>>>>>> Stashed changes
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
+<<<<<<< Updated upstream
             uuid = "F6FE00F5-ABA5-4D64-A1A9-171227CA4E94"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -83,6 +98,19 @@
             endingLineNumber = "156"
             landmarkName = "imageClick(tap:)"
             landmarkType = "7">
+=======
+            uuid = "E988A1C1-4CCA-402D-B566-EDE5BD3B7012"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "swiftText/Source/ShowBigImgController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "showSaveBtn"
+            landmarkType = "24">
+>>>>>>> Stashed changes
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

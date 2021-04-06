@@ -107,14 +107,18 @@
 		C40F67C21FC71C75004A7868 /* swiftText */ = {
 			isa = PBXGroup;
 			children = (
+				C48E2E86261C0A20006E1F04 /* Source */,
 				C40F67C31FC71C75004A7868 /* AppDelegate.swift */,
 				C44EF7EA238C0F8800BD2C9C /* commont.swift */,
 				C44EF7E4238C03C300BD2C9C /* TabbarViewController.swift */,
 				C44EF7E5238C03C300BD2C9C /* YUNNavigationController.swift */,
+<<<<<<< Updated upstream
 				C435FE75244DA585002718B9 /* ShowBigImgController.swift */,
 				C415064B255921CE0027FD3F /* ShowBigImgBackView.swift */,
 				C415064F255923390027FD3F /* CollectionViewCell.swift */,
 				C43D4B37255A636200776E0D /* CollectionPageFlowLayout.swift */,
+=======
+>>>>>>> Stashed changes
 				C4A1C0AD2134EFA600714601 /* HomePageController.swift */,
 				C4A1C0AF2134EFB900714601 /* ListViewController.swift */,
 				C4A1C0B12134EFE000714601 /* UserInfoController.swift */,
@@ -138,6 +142,17 @@
 				C4A3082123A0FB6800E3A312 /* long.jpg */,
 			);
 			path = images;
+			sourceTree = "<group>";
+		};
+		C48E2E86261C0A20006E1F04 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				C435FE75244DA585002718B9 /* ShowBigImgController.swift */,
+				C415064B255921CE0027FD3F /* ShowBigImgBackView.swift */,
+				C415064F255923390027FD3F /* CollectionViewCell.swift */,
+				C43D4B37255A636200776E0D /* CollectionPageFlowLayout.swift */,
+			);
+			path = Source;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -221,12 +236,18 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-swiftText/Pods-swiftText-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImageFLPlugin/SDWebImageFLPlugin.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImageFLPlugin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

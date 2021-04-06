@@ -25,6 +25,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>请允许访问您的相册，用来保存图片</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>请允许访问您的相册，用来设置头像</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

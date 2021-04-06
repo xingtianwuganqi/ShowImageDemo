@@ -6,6 +6,8 @@ target “swiftText” do
 
 pod 'SnapKit'
 pod 'SDWebImage'
+pod 'SDWebImageFLPlugin'
+pod 'MBProgressHUD'
 
 end
 

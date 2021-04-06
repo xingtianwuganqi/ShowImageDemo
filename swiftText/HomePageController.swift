@@ -12,12 +12,16 @@ import SDWebImage
 
 class HomePageController: UIViewController {
 
-    let imageArr = ["https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1590148116285&di=65da60e8eb463c32bc07ea093306ac5e&imgtype=0&src=http%3A%2F%2Fpicture.ik123.com%2Fuploads%2Fallimg%2F180330%2F4-1P330160644.jpg",
+    let imageArr = ["https://n.sinaimg.cn/tech/transform/326/w186h140/20210406/287f-knipfse7144059.gif",
                     "http://img.sccnn.com/bimg/337/23926.jpg",
                     "http://pic37.huitu.com/res/20150926/709_20150926211750111200_1.jpg",
                     "http://img.pconline.com.cn/images/photoblog/2/5/2/6/2526376/20069/18/1158593819487.jpg",
+<<<<<<< Updated upstream
                     "http://pic38.nipic.com/20140213/12403214_222400981002_2.jpg","12403214_222400981002_2"]
     
+=======
+                    "http://pic38.nipic.com/20140213/12403214_222400981002_2.jpg"]
+>>>>>>> Stashed changes
     lazy var tableview : UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.showsVerticalScrollIndicator = false
@@ -52,6 +56,7 @@ class HomePageController: UIViewController {
     func showImg (imgs: [String],url: String) {
         let showController = ShowBigImgController(urls: imgs, url: url)
         showController.modalPresentationStyle = .overFullScreen
+//        showController.showSaveBtn = true
         self.present(showController, animated: false, completion: nil)
     }
 }
