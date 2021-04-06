@@ -24,12 +24,14 @@ Pod::Spec.new do |spec|
   spec.author             = { "jingjun" => "rxswift@126.com" }
 
   spec.platform     = :ios, "10.0"
+  #spec.ios.deployment_target = "10.0"
 
   spec.source       = { :git => "https://github.com/xingtianwuganqi/ShowImageDemo.git", :tag => "#{spec.version}" }
-
+  spec.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
   spec.source_files  = "swiftText/Source/*.swift"
 
-  spec.frameworks = "Foundation","UIKit"
+  spec.frameworks = "Foundation","UIKit","Photos"
+  
   spec.ios.dependency 'SDWebImage'
   spec.ios.dependency 'SDWebImageFLPlugin'
   spec.ios.dependency 'MBProgressHUD'

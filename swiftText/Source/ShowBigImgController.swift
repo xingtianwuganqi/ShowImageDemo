@@ -78,11 +78,11 @@ public class ShowBigImgController: UIViewController {
         self.showView.dismissCallBack = { [weak self] in
             self?.dismiss(animated: false, completion: nil)
         }
-        self.saveBtn.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: 70, height: 16))
-            make.top.equalToSuperview().offset(SystemNaviBarHeight - 20)
-            make.right.equalToSuperview().offset(-20)
-        }
+        self.saveBtn.translatesAutoresizingMaskIntoConstraints = false
+        self.saveBtn.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        self.saveBtn.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        self.saveBtn.topAnchor.constraint(equalTo: self.view.topAnchor, constant: SystemNaviBarHeight).isActive = true
+        self.saveBtn.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -15).isActive = true
     }
     
     // 保存图片
@@ -114,11 +114,8 @@ public class ShowBigImgController: UIViewController {
     }
     
     func savePhotos(image: UIImage?,data: Data?) {
-
         PHPhotoLibrary.requestAuthorization { (status) in
-
             if status == PHAuthorizationStatus.authorized || status == PHAuthorizationStatus.notDetermined {
-                
                 PHPhotoLibrary.shared().performChanges {
                     if let data = data {
                         let req = PHAssetCreationRequest.forAsset()
@@ -126,8 +123,6 @@ public class ShowBigImgController: UIViewController {
                     }else if let img = image{
                         _ = PHAssetChangeRequest.creationRequestForAsset(from: img)
                     }
-                    
-                    
                 } completionHandler: { (finish, error) in
                     DispatchQueue.main.async {
                         if finish {
@@ -139,42 +134,26 @@ public class ShowBigImgController: UIViewController {
                         }
                     }
                 }
-
             }else{
                 MBProgressHUD.xy_hide()
                 //去设置
                 self.openSystemSettingPhotoLibrary()
-
             }
-
         }
     }
-
+    
     func openSystemSettingPhotoLibrary() {
-
-            let alert = UIAlertController(title:"未获得权限访问您的照片", message:"请在设置选项中允许访问您的照片", preferredStyle: .alert)
-
-            let confirm = UIAlertAction(title:"去设置", style: .default) { (_)in
-
-                let url=URL.init(string: UIApplication.openSettingsURLString)
-
-                if  UIApplication.shared.canOpenURL(url!){
-
-                    UIApplication.shared.open(url!, options: [:], completionHandler: { (ist)in
-
-                    })
-
-                }
-
+        let alert = UIAlertController(title:"未获得权限访问您的照片", message:"请在设置选项中允许访问您的照片", preferredStyle: .alert)
+        let confirm = UIAlertAction(title:"去设置", style: .default) { (_)in
+            let url=URL.init(string: UIApplication.openSettingsURLString)
+            if  UIApplication.shared.canOpenURL(url!){
+                UIApplication.shared.open(url!, options: [:], completionHandler: { (ist)in
+                })
             }
-
-            let cancel = UIAlertAction(title:"取消", style: .cancel, handler:nil)
-
-            alert.addAction(cancel)
-
-            alert.addAction(confirm)
-
-            self.present(alert, animated:true, completion:nil)
-
         }
+        let cancel = UIAlertAction(title:"取消", style: .cancel, handler:nil)
+        alert.addAction(cancel)
+        alert.addAction(confirm)
+        self.present(alert, animated:true, completion:nil)
+    }
 }

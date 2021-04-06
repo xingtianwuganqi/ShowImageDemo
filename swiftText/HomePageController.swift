@@ -7,9 +7,8 @@
 //
 
 import UIKit
-import SnapKit
 import SDWebImage
-
+import SnapKit
 class HomePageController: UIViewController {
 
     let imageArr = ["https://n.sinaimg.cn/tech/transform/326/w186h140/20210406/287f-knipfse7144059.gif",
