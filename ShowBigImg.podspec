@@ -19,18 +19,18 @@ Pod::Spec.new do |spec|
   spec.homepage     = "https://github.com/xingtianwuganqi/ShowImageDemo.git"
 
   spec.license      = { :type => "MIT" }
-  spec.swift_version = '5.0'
+  spec.swift_versions = ['5.0', '5.1', '5.2', '5.3']
 
-  spec.author             = { "jingjun" => "rxswift@126.com" }
+  spec.author       = { "jingjun" => "rxswift@126.com" }
 
   spec.platform     = :ios, "10.0"
   #spec.ios.deployment_target = "10.0"
 
   spec.source       = { :git => "https://github.com/xingtianwuganqi/ShowImageDemo.git", :tag => "#{spec.version}" }
   spec.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
-  spec.source_files  = "swiftText/Source/*.swift"
+  spec.source_files = "swiftText/Source/*.swift"
 
-  spec.frameworks = "Foundation","UIKit","Photos"
+  spec.frameworks   = ["Foundation","UIKit","Photos"]
   
   spec.ios.dependency 'SDWebImage'
   spec.ios.dependency 'SDWebImageFLPlugin'

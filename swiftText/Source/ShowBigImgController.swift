@@ -117,11 +117,14 @@ public class ShowBigImgController: UIViewController {
         PHPhotoLibrary.requestAuthorization { (status) in
             if status == PHAuthorizationStatus.authorized || status == PHAuthorizationStatus.notDetermined {
                 PHPhotoLibrary.shared().performChanges {
-                    if let data = data {
+                    if let imgData = data {
                         let req = PHAssetCreationRequest.forAsset()
-                        req.addResource(with: .photo, data: data, options: nil)
+                        req.addResource(with: .photo, data: imgData, options: nil)
                     }else if let img = image{
                         _ = PHAssetChangeRequest.creationRequestForAsset(from: img)
+                    }else{
+                        MBProgressHUD.xy_hide()
+                        return
                     }
                 } completionHandler: { (finish, error) in
                     DispatchQueue.main.async {
@@ -133,7 +136,7 @@ public class ShowBigImgController: UIViewController {
                             MBProgressHUD.xy_show("保存失败")
                         }
                     }
-                }
+                };
             }else{
                 MBProgressHUD.xy_hide()
                 //去设置
