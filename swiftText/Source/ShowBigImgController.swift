@@ -12,7 +12,7 @@ import MBProgressHUD
 
 public class ShowBigImgController: UIViewController {
     
-    private let SystemNaviBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height + 44
+    private let SystemNaviBarHeight: CGFloat = UIApplication.shared.statusBarFrame.height + 24
     
     /// 默认不显示
     public var showSaveBtn: Bool = false {

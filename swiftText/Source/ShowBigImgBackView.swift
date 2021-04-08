@@ -172,7 +172,7 @@ extension ShowBigImgBackView {
             return
         }
         self.showAnimation()
-        self.transformScaleAnimation(fromValue: 0.3, toValue: 1, duration: 0.3, view: cell.reloadImg)
+        self.transformScaleAnimation(fromValue: 0.3, toValue: 1, duration: 0.3, view: cell.imgView)
         DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             // 赋值方法中imageview重新布局
             self.collectionView.reloadData()

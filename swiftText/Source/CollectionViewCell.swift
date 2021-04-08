@@ -22,9 +22,25 @@ class CollectionViewCell: UICollectionViewCell {
     }()
     
     
-    lazy var reloadImg : reloadImgView = {
-        let imageView = reloadImgView.init(frame: .zero)
+//    lazy var reloadImg : reloadImgView = {
+//        let imageView = reloadImgView.init(frame: CGRect(x: 0, y: (ScreenH - ScreenW) / 2, width: ScreenW, height: ScreenW))
+//        return imageView
+//    }()
+    
+    lazy var imgView : FLAnimatedImageView = {
+        let imageView = FLAnimatedImageView.init()
+        imageView.contentMode = .scaleToFill
         return imageView
+    }()
+    
+    
+    lazy var loading: UIActivityIndicatorView = {
+        let loading = UIActivityIndicatorView.init()
+        loading.backgroundColor = .clear
+        loading.color = .white
+        loading.hidesWhenStopped = true
+        loading.stopAnimating()
+        return loading
     }()
 
     var imgUrl: String? {
@@ -33,11 +49,10 @@ class CollectionViewCell: UICollectionViewCell {
                 return
             }
 
-            reloadImg.loading.startAnimating()
-            reloadImg.imgView.sd_setImage(with: URL(string: img_url), placeholderImage: UIImage.imageWithColor(color: UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)), options: []) { [weak self](img, error, _, url) in
+            loading.startAnimating()
+            imgView.sd_setImage(with: URL(string: img_url), placeholderImage: UIImage.imageWithColor(color: UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)), options: []) { [weak self](img, error, _, url) in
                 guard let `self` = self else { return }
                 guard img != nil else {
-                    self.reloadImg.loading.stopAnimating()
                     return
                 }
                 guard let width = img?.size.width else {
@@ -48,7 +63,7 @@ class CollectionViewCell: UICollectionViewCell {
                 }
 
                 
-                self.reloadImg.loading.stopAnimating()
+                self.loading.stopAnimating()
                 let w = ScreenW
                 let h = ScreenW / (width / height)
                 
@@ -57,13 +72,13 @@ class CollectionViewCell: UICollectionViewCell {
                     DispatchQueue.main.async {
                         self.backScroll.contentSize = CGSize(width: ScreenW, height: h)
                         self.backScroll.contentOffset = CGPoint(x: 0, y: y)
-                        self.reloadImg.frame = CGRect(x: 0, y: 0, width: w, height: h)
+                        self.imgView.frame = CGRect(x: 0, y: 0, width: w, height: h)
                     }
                     
                 }else{
                     let y = (ScreenH - h) / 2
                     DispatchQueue.main.async {
-                        self.reloadImg.frame = CGRect(x: 0, y: y, width: w, height: h)
+                        self.imgView.frame = CGRect(x: 0, y: y, width: w, height: h)
                     }
                     
                 }
@@ -76,7 +91,7 @@ class CollectionViewCell: UICollectionViewCell {
             guard let imageV = image else {
                 return
             }
-            reloadImg.imgView.image = imageV
+            imgView.image = imageV
             let w = ScreenW
             let h = ScreenW / (imageV.size.width / imageV.size.height)
             
@@ -84,10 +99,10 @@ class CollectionViewCell: UICollectionViewCell {
                 let y = (h - ScreenH) / 2
                 self.backScroll.contentSize = CGSize(width: ScreenW, height: h)
                 self.backScroll.contentOffset = CGPoint(x: 0, y: y)
-                reloadImg.frame = CGRect(x: 0, y: 0, width: w, height: h)
+                imgView.frame = CGRect(x: 0, y: 0, width: w, height: h)
             }else{
                 let y = (ScreenH - h) / 2
-                reloadImg.frame = CGRect(x: 0, y: y, width: w, height: h)
+                imgView.frame = CGRect(x: 0, y: y, width: w, height: h)
             }
         }
     }
@@ -102,10 +117,16 @@ class CollectionViewCell: UICollectionViewCell {
         self.contentView.backgroundColor = .clear
         self.contentView.addSubview(self.backScroll)
 
-        self.backScroll.addSubview(self.reloadImg)
-        self.addTapGesture(imageview: self.reloadImg, scroll: self.backScroll)
-        self.addPanGesture(reloadImg)
+        self.backScroll.addSubview(self.imgView)
+        self.addTapGesture(imageview: self.imgView, scroll: self.backScroll)
+        self.addPanGesture(imgView)
     
+        self.contentView.addSubview(self.loading)
+        self.loading.translatesAutoresizingMaskIntoConstraints = false
+        self.loading.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        self.loading.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        self.loading.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        self.loading.widthAnchor.constraint(equalToConstant: 30).isActive = true
     }
     
     required init?(coder: NSCoder) {
@@ -116,7 +137,7 @@ class CollectionViewCell: UICollectionViewCell {
 extension CollectionViewCell : UIScrollViewDelegate {
     // 当scrollview 尝试进行缩放的时候
     public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return self.reloadImg
+        return self.imgView
     }
     
     // 当缩放完毕的时候调用
@@ -135,7 +156,7 @@ extension CollectionViewCell : UIScrollViewDelegate {
         var centerY = self.backScroll.center.y
         centerX = scrollView.contentSize.width > scrollView.frame.size.width ? scrollView.contentSize.width/2 : centerX
         centerY = scrollView.contentSize.height > scrollView.frame.size.height ? scrollView.contentSize.height/2 : centerY
-        self.reloadImg.center = CGPoint(x: centerX, y: centerY)
+        self.imgView.center = CGPoint(x: centerX, y: centerY)
     }
     
     public func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -173,7 +194,7 @@ extension CollectionViewCell {
         }else{
             
             if tap.state == .recognized {
-                self.tapMoveCallBack?(self.reloadImg)
+                self.tapMoveCallBack?(self.imgView)
             }
         }
     }
