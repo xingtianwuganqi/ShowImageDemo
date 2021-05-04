@@ -21,12 +21,6 @@ class CollectionViewCell: UICollectionViewCell {
         return scroll
     }()
     
-    
-//    lazy var reloadImg : reloadImgView = {
-//        let imageView = reloadImgView.init(frame: CGRect(x: 0, y: (ScreenH - ScreenW) / 2, width: ScreenW, height: ScreenW))
-//        return imageView
-//    }()
-    
     lazy var imgView : FLAnimatedImageView = {
         let imageView = FLAnimatedImageView.init()
         imageView.contentMode = .scaleToFill
@@ -71,13 +65,15 @@ class CollectionViewCell: UICollectionViewCell {
                     let y = (h - ScreenH) / 2
                     DispatchQueue.main.async {
                         self.backScroll.contentSize = CGSize(width: ScreenW, height: h)
-                        self.backScroll.contentOffset = CGPoint(x: 0, y: y)
+                        self.backScroll.contentOffset = CGPoint(x: 0, y: 0)
                         self.imgView.frame = CGRect(x: 0, y: 0, width: w, height: h)
                     }
                     
                 }else{
                     let y = (ScreenH - h) / 2
                     DispatchQueue.main.async {
+                        self.backScroll.contentSize = CGSize(width: ScreenW, height: ScreenH)
+                        self.backScroll.contentOffset = CGPoint(x: 0, y: 0)
                         self.imgView.frame = CGRect(x: 0, y: y, width: w, height: h)
                     }
                     
@@ -98,10 +94,12 @@ class CollectionViewCell: UICollectionViewCell {
             if h > ScreenH {
                 let y = (h - ScreenH) / 2
                 self.backScroll.contentSize = CGSize(width: ScreenW, height: h)
-                self.backScroll.contentOffset = CGPoint(x: 0, y: y)
+                self.backScroll.contentOffset = CGPoint(x: 0, y: 0)
                 imgView.frame = CGRect(x: 0, y: 0, width: w, height: h)
             }else{
                 let y = (ScreenH - h) / 2
+                self.backScroll.contentSize = CGSize(width: ScreenW, height: ScreenH)
+                self.backScroll.contentOffset = CGPoint(x: 0, y: 0)
                 imgView.frame = CGRect(x: 0, y: y, width: w, height: h)
             }
         }
@@ -265,6 +263,8 @@ extension CollectionViewCell: UIGestureRecognizerDelegate {
                 let imgH = ScreenW * (imageview.frame.size.height) / (imageview.frame.size.width)
                 let y = (ScreenH - imgH) / 2
                 UIView.animate(withDuration: 0.3) {
+                    //背景色不透明
+                    self.changeAlphaCallBack?(1)
                     imageview.frame = CGRect(x: 0, y: y, width: imgW, height: imgH)
                 }
             }
@@ -320,45 +320,4 @@ extension CollectionViewCell: UIGestureRecognizerDelegate {
             self.backRemoveCallBack?()
         }
     }
-}
-
-class reloadImgView: UIView {
-    
-    lazy var imgView : FLAnimatedImageView = {
-        let imageView = FLAnimatedImageView.init()
-        imageView.contentMode = .scaleToFill
-        return imageView
-    }()
-    
-    
-    lazy var loading: UIActivityIndicatorView = {
-        let loading = UIActivityIndicatorView.init()
-        loading.backgroundColor = .clear
-        loading.color = .white
-        loading.hidesWhenStopped = true
-        return loading
-    }()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.backgroundColor = .clear
-        self.addSubview(imgView)
-        self.addSubview(loading)
-        self.imgView.translatesAutoresizingMaskIntoConstraints = false
-        self.imgView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        self.imgView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        self.imgView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        self.imgView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        
-        self.loading.translatesAutoresizingMaskIntoConstraints = false
-        self.loading.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        self.loading.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        self.loading.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        self.loading.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
 }

@@ -109,9 +109,9 @@ public class ShowBigImgController: UIViewController {
         self.showView.transformAnimation()
     }
     
-    deinit {
-        print("ShowController Deinit")
-    }
+//    deinit {
+//        print("ShowController Deinit")
+//    }
     
     func savePhotos(image: UIImage?,data: Data?) {
         PHPhotoLibrary.requestAuthorization { (status) in

@@ -16,7 +16,7 @@ let ScreenH = UIScreen.main.bounds.size.height
 
 public class ShowBigImgBackView: UIView {
     
-    let duration = 0.4
+    let duration = 0.3
     
     lazy var backBtn : UIButton = {
         let button = UIButton.init(type: .custom)
@@ -182,7 +182,9 @@ extension ShowBigImgBackView {
     
     // 缩放 + 淡入淡出
     func removeAnimation(_ imgView: UIView) {
-        self.transformScaleAnimation(fromValue: 1.0, toValue: 0.3, duration: 0.3, view: imgView)
+        if imgView.frame.size.height <= ScreenH {
+            self.transformScaleAnimation(fromValue: 1.0, toValue: 0.3, duration: 0.3, view: imgView)
+        }
         self.backRemoveAnimation(duration)
     }
     
