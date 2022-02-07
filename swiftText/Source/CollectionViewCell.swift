@@ -44,7 +44,7 @@ class CollectionViewCell: UICollectionViewCell {
             }
 
             loading.startAnimating()
-            imgView.sd_setImage(with: URL(string: img_url), placeholderImage: UIImage.imageWithColor(color: UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)), options: []) { [weak self](img, error, _, url) in
+            imgView.sd_setImage(with: URL(string: img_url), placeholderImage: UIImage.imageWithColor(color: UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)), options: .allowInvalidSSLCertificates) { [weak self](img, error, _, url) in
                 guard let `self` = self else { return }
                 guard img != nil else {
                     return
@@ -62,7 +62,7 @@ class CollectionViewCell: UICollectionViewCell {
                 let h = ScreenW / (width / height)
                 
                 if h > ScreenH {
-                    let y = (h - ScreenH) / 2
+//                    let y = (h - ScreenH) / 2
                     DispatchQueue.main.async {
                         self.backScroll.contentSize = CGSize(width: ScreenW, height: h)
                         self.backScroll.contentOffset = CGPoint(x: 0, y: 0)
@@ -92,7 +92,7 @@ class CollectionViewCell: UICollectionViewCell {
             let h = ScreenW / (imageV.size.width / imageV.size.height)
             
             if h > ScreenH {
-                let y = (h - ScreenH) / 2
+//                let y = (h - ScreenH) / 2
                 self.backScroll.contentSize = CGSize(width: ScreenW, height: h)
                 self.backScroll.contentOffset = CGPoint(x: 0, y: 0)
                 imgView.frame = CGRect(x: 0, y: 0, width: w, height: h)

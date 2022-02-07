@@ -63,7 +63,7 @@ extension HomePageController :UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell: imageCell = tableView.dequeueReusableCell(withIdentifier: "imageCell", for: indexPath) as! imageCell
-        cell.imageview.sd_setImage(with: URL(string: self.imageArr[indexPath.row]), completed: nil)
+        cell.imageview.sd_setImage(with: URL(string: self.imageArr[indexPath.row]), placeholderImage: UIImage.imageWithColor(color: UIColor.init(red: 0, green: 0, blue: 0, alpha: 1)),options: .allowInvalidSSLCertificates, completed: nil)
         return cell
     }
     
