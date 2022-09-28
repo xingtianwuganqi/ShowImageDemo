@@ -436,7 +436,7 @@
 				DEVELOPMENT_TEAM = SX73SRB2SL;
 				GCC_PREFIX_HEADER = swiftText/Header.h;
 				INFOPLIST_FILE = swiftText/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.720yun.AMapDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -456,7 +456,7 @@
 				DEVELOPMENT_TEAM = SX73SRB2SL;
 				GCC_PREFIX_HEADER = swiftText/Header.h;
 				INFOPLIST_FILE = swiftText/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.720yun.AMapDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -9,7 +9,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "ShowBigImg"
-  spec.version      = "0.0.13"
+  spec.version      = "0.0.14"
   spec.summary      = "仿微信朋友圈查看图片"
   
   spec.description  = <<-DESC
@@ -23,8 +23,7 @@ Pod::Spec.new do |spec|
 
   spec.author       = { "jingjun" => "rxswift@126.com" }
 
-  spec.platform     = :ios, "10.0"
-  #spec.ios.deployment_target = "10.0"
+  spec.platform     = :ios, "11.0"
 
   spec.source       = { :git => "https://github.com/xingtianwuganqi/ShowImageDemo.git", :tag => "#{spec.version}" }
   spec.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
