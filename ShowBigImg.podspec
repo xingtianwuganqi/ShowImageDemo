@@ -23,7 +23,7 @@ Pod::Spec.new do |spec|
 
   spec.author       = { "jingjun" => "rxswift@126.com" }
 
-  spec.platform     = :ios, "11.0"
+  spec.platform     = :ios, "10.0"
 
   spec.source       = { :git => "https://github.com/xingtianwuganqi/ShowImageDemo.git", :tag => "#{spec.version}" }
   #spec.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
@@ -35,7 +35,7 @@ Pod::Spec.new do |spec|
   spec.ios.dependency 'SDWebImageFLPlugin'
   spec.ios.dependency 'MBProgressHUD'
 
-  spec.pod_target_xcconfig = { 'VALID_ARCHS' => 'arm64' }
-  #spec.pod_target_xcconfig = { 'VALID_ARCHS' => 'x86_64 armv7 arm64' }
+  #spec.pod_target_xcconfig = { 'VALID_ARCHS' => 'arm64' }
+  spec.pod_target_xcconfig = { 'VALID_ARCHS' => 'x86_64 armv7 arm64' }
 
 end
