@@ -9,7 +9,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "ShowBigImg"
-  spec.version      = "0.0.14"
+  spec.version      = "0.0.15"
   spec.summary      = "仿微信朋友圈查看图片"
   
   spec.description  = <<-DESC
@@ -26,7 +26,7 @@ Pod::Spec.new do |spec|
   spec.platform     = :ios, "11.0"
 
   spec.source       = { :git => "https://github.com/xingtianwuganqi/ShowImageDemo.git", :tag => "#{spec.version}" }
-  spec.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
+  #spec.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
   spec.source_files = "swiftText/Source/*.swift"
 
   spec.frameworks   = ["Foundation","UIKit","Photos"]
@@ -34,5 +34,7 @@ Pod::Spec.new do |spec|
   spec.ios.dependency 'SDWebImage'
   spec.ios.dependency 'SDWebImageFLPlugin'
   spec.ios.dependency 'MBProgressHUD'
+
+  spec.pod_target_xcconfig = { 'VALID_ARCHS' => 'arm64' }
 
 end
