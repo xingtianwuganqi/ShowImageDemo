@@ -36,5 +36,6 @@ Pod::Spec.new do |spec|
   spec.ios.dependency 'MBProgressHUD'
 
   spec.pod_target_xcconfig = { 'VALID_ARCHS' => 'arm64' }
+  #spec.pod_target_xcconfig = { 'VALID_ARCHS' => 'x86_64 armv7 arm64' }
 
 end
